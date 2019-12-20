@@ -1,0 +1,148 @@
+.bt{
+	border:1px solid #25692A;
+	border-radius:4px;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Verdana;
+	font-weight:bold;
+	font-size:13px;
+	padding:2px 4px;
+	text-decoration:none;
+	background: white;
+}
+
+#bt_atualizar_pesquiza{
+	border:1px solid #25692A;
+	border-radius:4px;
+	display:inline-block;
+	cursor:pointer;
+	font-family:Verdana;
+	font-weight:bold;
+	font-size:13px;
+	padding:2px 4px;
+	text-decoration:none;
+	background-repeat: no-repeat;
+	background-image: url(../img/atualizar.png.jpg);
+}
+
+
+.container {
+				border: 2px solid #CCC; 
+				border-radius: 1em; 
+				margin: 10px;
+				padding-right: 10px;
+				padding-left: 10px;
+				padding-bottom: 20px;
+				height: 75px;
+				background-color: #DCDCDC;
+				/* background-image: linear-gradient( to bottom, #DCDCDC, #d6d4d4, #DCDCDC); */
+			}
+
+.icone_sair {
+				border: 1px solid #DCDCDC;
+				background-repeat: no-repeat;
+				background-image: url(../img/sair.png);
+				cursor:pointer;
+			}
+
+.icone_sair:hover {
+				border: 3px solid #DCDCDC;
+				background-repeat: no-repeat;
+				background-image: url(../img/sair2.jpg);
+			}
+.icone_tabela{
+				border: 1px solid #DCDCDC;
+				cursor:pointer;
+			}
+
+.icone_tabela:hover{
+				border: 1px solid black;
+			}
+
+.linha_tabela {
+				border: 1px solid #DCDCDC;
+			}
+
+.linha_tabela:hover {
+					border: 3px solid #DCDCDC;
+					background-color:#b5ccc0;
+					}
+.input_geral{
+			border:1px solid #25692A;
+			border-radius:3px;
+		}
+
+#canvas {
+	border:1px solid #000000; 
+	position: relative; 
+	top:10px; 
+	border-radius:3px;
+}
+
+#div_natureza{
+	border-style:solid; 
+	border-width: 1px; 
+	padding: 5px; 
+	display: inline-block; 
+	position: relative; 
+	top: 15px; 
+	border-radius: 10px;
+}
+
+#valor{
+			border:1px solid #25692A;
+			border-radius:3px;
+		}
+
+th{
+	padding: 5px;
+	border:1px solid black;
+	border-radius:3px;
+}
+
+h1{
+	display: inline-block; 
+	position: relative;
+	text-align: center;
+	bottom: 12px;
+	left: 8%;
+}
+
+h2{
+	font-family:Verdana;
+}
+
+h3{
+	font-family:Verdana;
+}
+
+form {
+	font-family:Verdana;
+	font-weight:bold;
+}
+
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 3px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
