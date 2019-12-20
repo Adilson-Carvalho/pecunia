@@ -12,8 +12,8 @@
 		<div class="container">
 				<a>
 					<img src="img\carteira.jpg" width="90" height="90" class="d-inline-block align-top">
-					<h1>Pecúnia</h1>
 				</a>
+				<h1>Pec&#250;nia</h1>
 		</div>			
 		
 		<?php
