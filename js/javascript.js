@@ -16,7 +16,7 @@
 			+mes.toString().padStart(2, '0')+
 			"-"+data.getDate().toString().padStart(2, '0');//formata a data dois digitos
 		
-		document.getElementById('descricao').value = "";
+		//document.getElementById('descricao').value = "";
 		
 		document.getElementById('valor').value = "";
 
@@ -33,6 +33,7 @@
 		option_ano.text = ano;
 	}
 
+	/*
 	function radioButton(){ //muda a cor da div do radio button dependendo receita/despesa
 
 		if (document.getElementById('radio_receita').checked) {
@@ -41,6 +42,7 @@
 			document.getElementById('div_natureza').style.border = "3px solid red"; //background = "#FF6347";
 		}
 	}
+	*/
 
 	function editar(id){
 		
@@ -126,13 +128,17 @@ function menuDescricacao(conta){
 function menuLateral(menu, opcao){
 	
 	// $teste.contentEditable = true; //torna editável
-	
 	//input hidden
+	
+	console.log(menu);
 	var menu = document.getElementById(menu);
-	if(opcao == 1){
+	
+	if(opcao == 1 && menu !== null){
 		menu.style.display ="inline"; //altera o estilo para visível
-	} else{
-		menu.style.display ="none"; //altera o estilo para visível
+	} 
+	else if( opcao == 2 && menu !== null) {
+			menu.style.display ="none"; //altera o estilo para visível
+		
 	}
 	
 }

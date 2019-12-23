@@ -34,10 +34,17 @@
 					<form id="form_principal" class="container" method="post" action="controller.post.php">
 						<h2  style="position: relative; bottom:15px;">Cadastrar Movimentação</h2>
 						<div style="position: relative; bottom:45px;">
-							<label>Natureza: </label>
+					
+					
+					
+						<!-- <label>Natureza: </label>
 								<div id="div_natureza" onchange="radioButton()">
 									<input type="radio" id="radio_receita" name="natureza" value="receita" checked>Receita<br>
 									<input type="radio" id="radio_despesa" name="natureza" value="despesa" checked>Despesa<br>
+									
+						-->
+									
+						
 								</div>
 								<label>Hora: </label>
 								<input id="hora" name="hora" class="input_geral" type="time">
@@ -46,31 +53,67 @@
 								
                 				<div class="dropdown bt">
                 					<span> Descricacao </span>
-                					<input type="hidden" id="descricao" name="descricao">
+                					<input type="hidden" id="conta" name="conta">
+                					<input type="hidden" id="subConta" name="subConta">
                 					
-                					<div class="dropdown-content bt" onbeforeunload="menuLateral('menuLateral_ganho', 2)">
+                					<div class="dropdown-content bt" >
                                 		<table>
-                                    		<tr class="linha_tabela" onMouseOver="menuLateral('menuLateral_ganho', 1)" ><td onclick="menuDescricacao('Ganhos')" >Ganhos</td></tr>                                 
-                                      		<tr class="linha_tabela"  onMouseOver="menuLateral('menuLateral_ganho', 2); menuLateral('menuLateral_alimento', 1)"><td id="Alimentacao" onclick="menuDescricacao('Alimentacao')">Alimentacao</td></tr> 
-                                    		<tr class="linha_tabela" onMouseOver="menuLateral('menuLateral_alimento', 2)"><td onclick="menuDescricacao('Educacao')" >Educacao</td></tr>
-                                    		<tr class="linha_tabela"><td onclick="menuDescricacao('Transporte')" >Transporte</td></tr>
-                                    		<tr class="linha_tabela"><td onclick="menuDescricacao('Saude')" >Saude</td></tr>
-                                    		<tr class="linha_tabela"><td onclick="menuDescricacao('Lazer')" >Lazer</td></tr>
+                                		
+                                		<?php      
+                                		
+                                		error_reporting(0);
+                                		
+                                		$con = new Sql();
+                                		
+                                		$menu = $con->menu();
+                                		
+                                		$teste = 50;
+                              		
+                                		foreach ($menu as $result){
+                                		    
+                                		    $array[] = "";
+ 
+                                		    if (!in_array( $result[conta], $array)) {
+                                		       
+                                		       echo"<tr class='linha_tabela' onMouseOver='menuLateral($teste, 1), menuLateral($teste-1, 2), menuLateral($teste+1, 2)' ><td onclick='menuDescricacao('Ganhos')' >".$result[conta]."</td></tr>";
+                                		       
+                                		       $teste += 1;
+                                		     
+                                		   }  
+                                		   
+                                		   array_push($array, $result[conta]);
+                                		};
+                                		
+                                		?>
+                                		
                                 		</table>
                                 		
-                                	
-                						<div style="display:none; position:absolute; left:112px; top:1px" id="menuLateral_ganho" class="bt">
+                                		<div style="display:none; position:absolute; left:112px; top:1px" id="50" class="bt">
         									<table >
-        										<tbody>
-        										<tr class="linha_tabela"><td>Salario</td></tr>
+        										<tbody>                        		
+                                		<?php
+                                		
+                                		foreach ($menu as $teste){
+                                		    
+                                		    if ($teste[conta] == "Ganhos") {
+                                		        echo "<tr class='linha_tabela'><td>$teste[sub_conta]</td></tr>";;
+                                		    }
+                                		    
+                                		}
+                                		
+        								?>
+        								
+        										<!-- <tr class="linha_tabela"><td>Salario</td></tr>
         										<tr class="linha_tabela"><td>Decimo</td></tr>
         										<tr class="linha_tabela"><td>Auxilio</td></tr>
         										<tr class="linha_tabela"><td>Outros</td></tr>
+        										 -->
+        										 
         										</tbody>
         									</table>
         								</div>
-                                		
-                                		<div style="display:none; position:absolute; left:112px; top:25px" id="menuLateral_alimento" class="bt">
+        								
+                                		<div style="display:none; position:absolute; left:112px; top:25px" id="51" class="bt">
         									<table >
         										<tbody>
         										<tr class="linha_tabela"><td>Lanche</td></tr>
@@ -133,17 +176,17 @@
 							</th>
 
 					<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='white'>
-					<th>Hora:</th><th>Data:</th><th>Descrição:</th><th>Valor:</th><th>Editar</th><th>Excluir</th>
+					<th>Data:</th><th>Conta:</th><th>Sub Conta:</th><th>Valor:</th><th>Editar</th><th>Excluir</th>
 
 					<?php // carrega a pgprincipal com as movimentações do mês corrente
 
 						if (isset($_POST['ano'])) { // verifica se o post foi carregado
-							$data = $_POST['ano']."/".$_POST['mes'];
+							$data = $_POST['ano']."-".$_POST['mes'];
 							$mes = $_POST['mes'];
 							$ano = $_POST['ano'];
 							
 						}else{ // atribui data atual se o post for vazio
-							$data = date('Y/m');
+							$data = date('Y-m');
 							$mes = date('m');
 							$ano = date('Y');
 					
@@ -151,7 +194,7 @@
 
 						echo "<script>optionDataHoraAtual($mes, $ano)</script>"; //option com a data do if retro
 
-						$pesquisarDado = new Sql(NULL, NULL, NULL, $data);
+						$pesquisarDado = new Sql(NULL, $data);
 						
 						$resultado = $pesquisarDado->pesquisar();
 						
@@ -160,14 +203,14 @@
 						$i = 0;
 						$receita = 0;
 						$despesa = 0;
-						foreach ($resultado as $coluna => $value) {
+						foreach ($resultado as $value) {
 							$cor = (($i % 2 == 0) ? "#F2FBEF" : "#DCDCDC"); //cria a tabela zebrada.
 							$id_linha = $value["id_registro"];
 							
 							//Monta a tabela
 							echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-							echo "<th id='$id_linha hora_linha'>".substr($value['hora'], 0, 5)."</th>"."<th id='$id_linha data_linha'>".$value['data']."</th>"."<th id='$id_linha descricao_linha'>".$value['descr_registro']."</th>"."<th id='$id_linha valor_linha'>"."R$ ".number_format($value['valor'], 2, ',', '.')."</th>". //formata de float para moeda.
-
+							echo "<th id='$id_linha data_linha'>".$value['data']."</th>"."<th>Conta</th>"."<th>Sub Conta</th>"."<th id='$id_linha valor_linha'>"."R$ ".number_format($value['valor'], 2, ',', '.')."</th>". //formata de float para moeda.
+											
 							"<th>"."<a> <img id='$id_linha' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>"."</th>".
 
 							"<th>"."<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>"."</th>";

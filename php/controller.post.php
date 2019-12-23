@@ -17,10 +17,8 @@ function consultaUsuario(){ //pesquisa se o usuario e senha existe
 function gravarDados(){
 
 	require('../class.php/sql.class.php');
-
-	printf($_POST['descricao']);//apagar
 	
-	$cadastraDado = new Sql( $_POST['natureza'],  str_replace(',', '.', $_POST['valor']), $_POST['descricao'], $_POST['data'], $_POST['hora']);// str_replace substitui a virgula por ponto
+	$cadastraDado = new Sql(str_replace(',', '.', $_POST['valor']), $_POST['data'], 1);//$_POST['id_conta']);// str_replace substitui a virgula por ponto
 
 	$cadastraDado->cadastrar();
 	
