@@ -18,9 +18,11 @@ function gravarDados(){
 
 	require('../class.php/sql.class.php');
 	
-	$cadastraDado = new Sql(str_replace(',', '.', $_POST['valor']), $_POST['data'], 1);//$_POST['id_conta']);// str_replace substitui a virgula por ponto
+	$cadastraDado = new Sql(str_replace(',', '.', $_POST['valor']), $_POST['data'], $_POST['subConta']);//$_POST['id_conta']);// str_replace substitui a virgula por ponto
 
 	$cadastraDado->cadastrar();
+	
+	print_r($_POST);
 	
 	unset($_POST);
 

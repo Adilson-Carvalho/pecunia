@@ -6,8 +6,8 @@
 		
 		var data = new Date;
 	
-		document.getElementById('hora').value = data.getHours().toString().padStart(2, '0')+
-			":"+data.getMinutes().toString().padStart(2, '0');
+		//document.getElementById('hora').value = data.getHours().toString().padStart(2, '0')+
+		//	":"+data.getMinutes().toString().padStart(2, '0');
 
 		var mes = data.getMonth();
 		mes = mes+1;
@@ -121,7 +121,7 @@ function menuDescricacao(conta){
 		// $teste.contentEditable = true; //torna editável
 		
 		//input hidden
-		var inputOpcao = document.getElementById('descricao');
+		var inputOpcao = document.getElementById('subConta');
 		inputOpcao.value = conta; // atribui a valor input hidden descricao
 }
 

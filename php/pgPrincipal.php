@@ -25,8 +25,9 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 <body onload="onloadForm(); canvas(); radioButton();">
 	<div class="container">
+	<h1>Pecunia</h1>
 		<a> <img src="../img/carteira.jpg" width="90" height="90">
-			<h1>Pecunia</h1> <img class="icone_sair" src="" onclick="logoff()"
+			 <img class="icone_sair" src="" onclick="logoff()"
 			width="20" height="20" style="position: absolute; top: 3%; left: 95%">
 
 		</a>
@@ -41,8 +42,11 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<div style="position: relative; bottom: 45px;"></div>
 
 
-			<label>Hora: </label> <input id="hora" name="hora"
-				class="input_geral" type="time"> <label>Dia: </label> <input
+			<!--  <label>Hora: </label> <input id="hora" name="hora"
+				class="input_geral" type="time">
+			-->
+				
+				 <label>Dia: </label> <input
 				id="data" name="data" class="input_geral" type="date">
 
 
@@ -74,7 +78,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
                                     if (! in_array($result[conta], $array)) {
 
-                                        echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1), menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td onclick='menuDescricacao('Ganhos')' >" . $result[conta] . "</td></tr>";
+                                        echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1), menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $result[conta] . "</td></tr>";
 
                                         $id_menu += 1;
 
@@ -107,7 +111,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
                                  
                                         if ($array_teste[$i] == $sub_menu[conta]) {
                                             
-                                             echo "<tr class='linha_tabela'><td>".$sub_menu[sub_conta]."</td></tr>";
+                                             echo "<tr class='linha_tabela'><td onclick='menuDescricacao(".$sub_menu[id_conta].")'>".$sub_menu[sub_conta]."</td></tr>";
                                         }
                                     }                         
                                  
