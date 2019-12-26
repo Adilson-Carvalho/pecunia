@@ -23,7 +23,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 	</head>
 
-<body onload="onloadForm(); canvas(); radioButton();">
+<body onload="onloadForm(); canvas();">
 	<div class="container">
 	<h1>Pecunia</h1>
 		<a> <img src="../img/carteira.jpg" width="90" height="90">
@@ -50,11 +50,8 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 				id="data" name="data" class="input_geral" type="date">
 
 
-
-
-
 			<div class=" bt dropdown">
-				<span> Descricacao </span> <input type="hidden" id="conta"
+				<span id="span_descricao"> Descricacao </span> <input type="hidden" id="conta"
 					name="conta"> <input type="hidden" id="subConta" name="subConta">
 
 
@@ -111,7 +108,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
                                  
                                         if ($array_teste[$i] == $sub_menu[conta]) {
                                             
-                                             echo "<tr class='linha_tabela'><td onclick='menuDescricacao(".$sub_menu[id_conta].")'>".$sub_menu[sub_conta]."</td></tr>";
+                                            echo "<tr class='linha_tabela'><td onclick='menuDescricacao(".$sub_menu[id_conta].","."\"".$sub_menu[sub_conta]."\"".")''>".$sub_menu[sub_conta]."</td></tr>";
                                         }
                                     }                         
                                  
@@ -122,28 +119,11 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
                              
                                 }//fechamento do primeiro foreach
 
-                                ?>
-                                
-                                
-        			
-
-					
-					
-					
-					
-					
+                                ?>					
 				</div>
 
 			</div>
 
-
-
-
-
-
-
-
-			
 
 			<div style="display: inline">
 				<label>Valor: </label> <input id="valor" data-thousands=""
@@ -156,9 +136,6 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 		</form>
 
 	</div>
-
-
-
 
 
 	<!-- div mais externa envolve a tabela e o grafico. -->
