@@ -11,33 +11,36 @@
 			
 		document.getElementById('data').value = data.getFullYear()+"-"
 			+mes.toString().padStart(2, '0')+
-			"-"+data.getDate().toString().padStart(2, '0');//formata a data dois digitos
+			"-"+data.getDate().toString().padStart(2, '0');// formata a data
+															// dois digitos
 		
 		document.getElementById('valor').value = "";
 
 		document.getElementById('bt_cadastrar').innerHTML = "Cadastrar";
 
-	}
+	} 
 
-	function optionDataHoraAtual(mes, ano){ //carrega o comobox com a data atual
+	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data
+											// atual
 
 		var optionMes = document.getElementById("option_mes");
 		option_mes.selectedIndex = (mes -1);
 
 		var optionAno = document.getElementById("option_ano");
 		option_ano.text = ano;
-	}
+	} 
 
 	function editar(id){
 		
-		//input hidden
+		// input hidden
 		var inputOpcao = document.getElementById('opcao');
-		inputOpcao.value = 'editar'; // atribui a opção editra ao input hidden opcao
-		//input hidden
+		inputOpcao.value = 'editar'; // atribui a opção editra ao input
+										// hidden opcao
+		// input hidden
 		var inputId = document.getElementById('id_editar');
 		inputId.value = id; // atribui o valor do id ao input hidden id
 
-		//carrega o form com o valor a ser editado
+		// carrega o form com o valor a ser editado
 		var celulaHora = id+" hora_linha";
 		document.getElementById('hora').value = document.getElementById(celulaHora).innerHTML.substring(0, 5);
 		
@@ -48,27 +51,36 @@
 		document.getElementById('descricao').value = document.getElementById(celulaDescricao).innerHTML;
 		
 		var celulaValor = id+" valor_linha";
-		document.getElementById('valor').value =  document.getElementById(celulaValor).innerHTML.substring(3); // tira o R$.
+		document.getElementById('valor').value =  document.getElementById(celulaValor).innerHTML.substring(3); // tira
+																												// o
+																												// R$.
 
 		document.getElementById('bt_cadastrar').innerHTML = "Editar";
 	
 	}
 
 	function excluir(id){
-		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona pg controller.get com get da id
+		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona
+																		// pg
+																		// controller.get
+																		// com
+																		// get
+																		// da id
 	}
 
 	function logoff(){
-		location.href = 'controller.get.php?opcao=logoff' // redireciona pg de logoff.php
+		location.href = 'controller.get.php?opcao=logoff' // redireciona pg de
+															// logoff.php
 	}
 
-	$(function() { //coloca a mascara de moeda no input valor.
+	$(function() { // coloca a mascara de moeda no input valor.
 				$('#valor').maskMoney();
 	})
 
 	function canvas(){
 
-		//recupera os valores das celulas retira as palavras e os cifrões  e  a virgula
+		// recupera os valores das celulas retira as palavras e os cifrões e a
+		// virgula
 		var receita = ((document.getElementById('canvas_receita').innerHTML).substring(10)).replace(".","");
 		var despesa = (document.getElementById('canvas_despesa').innerHTML).substring(12).replace(".","");
 		var receita = parseFloat(receita);
@@ -91,12 +103,30 @@
 				ctx.fillRect (10, 300, 120, alturaReceita);
 
 				ctx.fillStyle = "rgb(255, 99, 71)";
-				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));/*cria uma altura porcentage relativa a altura
-																			da receita */
+				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));/*
+																			 * cria
+																			 * uma
+																			 * altura
+																			 * porcentage
+																			 * relativa
+																			 * a
+																			 * altura
+																			 * da
+																			 * receita
+																			 */
 
 				ctx.fillStyle = "rgb(0, 191, 255)";
-				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));/*cria uma altura porcentage relativa a altura
-																			da receita */
+				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));/*
+																		 * cria
+																		 * uma
+																		 * altura
+																		 * porcentage
+																		 * relativa
+																		 * a
+																		 * altura
+																		 * da
+																		 * receita
+																		 */
 			}
 	}
 	
@@ -104,30 +134,29 @@ function menuDescricacao(conta, sub_conta){
 		
 		// $teste.contentEditable = true; //torna editável
 		
-		//input hidden
+		// input hidden
 		var inputOpcao = document.getElementById('subConta');
 		inputOpcao.value = conta; // atribui a valor input hidden descricao
 		
 		document.getElementById('span_descricao').innerHTML = sub_conta;
 		
 		
-		//("."\"".$sub_menu[sub_conta]."\"".") 
+		// ("."\"".$sub_menu[sub_conta]."\"".")
 }
 
 
-function menuLateral(menu, opcao){
+function menuLateral(menus, opcao){
 	
 	// $teste.contentEditable = true; //torna editável
-	//input hidden
+	// input hidden
 
-	var menu = document.getElementById(menu);
-	
-	if(opcao == 1 && menu !== null){
-		menu.style.display ="inline"; //altera o estilo para visível
-	} 
-	else if( opcao == 2 && menu !== null) {
-		menu.style.display ="none"; //altera o estilo para visível
-		
-	}
-	
+	var menu = document.getElementById(menus);
+
+		if(opcao == 1 && menu !== null){
+		menu.style.display = "inline"; // altera o estilo para visível
+		} 
+		else if( opcao == 2 && menu !== null) {
+		menu.style.display ="none"; // altera o estilo para visível
+		}
+
 }

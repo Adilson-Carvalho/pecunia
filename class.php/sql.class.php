@@ -65,15 +65,15 @@ require ('conexao.class.php');
 
 		public function pesquisar(){
 			
-		    $statement = $this->sql->conectar()->prepare("SELECT * FROM `tb_movimentacoes` WHERE data > ':dataInicial' ");//"SELECT * FROM `tb_movimentacoes` WHERE data BETWEEN ':dataInicial-01' AND ':dataInicial-31' ORDER BY id_registro desc");
-
-			//$dataInicial = $this->data."-"."01";
-			$dataInicial = $this->data."-%";
+		    $statement = $this->sql->conectar()->prepare("SELECT tb_movimentacoes.id_registro, tb_movimentacoes.data, tb_plano_de_contas.natureza, tb_plano_de_contas.conta, tb_plano_de_contas.sub_conta,tb_movimentacoes.valor 
+                FROM tb_movimentacoes, tb_plano_de_contas WHERE tb_movimentacoes.fk_conta = tb_plano_de_contas.id_conta
+                    AND tb_movimentacoes.data BETWEEN :dataInicial AND :dataFinal;");
+		    
+			$dataInicial = $this->data."-01";
+			$dataFinal = $this->data."-31";
 			
-			$dataFinal = $this->data."-"."31";
-			
-			$statement->bindParam(":dataInicial", $dataInicial);
-			$statement->bindParam(":dataFinal", $dataFinal);
+			$statement->bindParam(':dataInicial', $dataInicial);
+			$statement->bindParam(':dataFinal', $dataFinal);
 			
 			$statement->execute();
 

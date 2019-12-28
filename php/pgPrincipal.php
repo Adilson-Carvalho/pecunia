@@ -11,12 +11,12 @@
 
 <link rel="stylesheet" type="text/css" href="../css/estilo.css">
 
-		<?php require('../class.php/sql.class.php'); ?>
+<?php require('../class.php/sql.class.php'); ?>
 
 
-		<?php
-if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se não pg erro
-    header('Location: ../index.php?erro=1');
+<?php
+    if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se não pg erro
+        header('Location: ../index.php?erro=1');
 }
 
 ?>
@@ -25,10 +25,10 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 <body onload="onloadForm(); canvas();">
 	<div class="container">
-	<h1>Pecunia</h1>
-		<a> <img src="../img/carteira.jpg" width="90" height="90">
-			 <img class="icone_sair" src="" onclick="logoff()"
-			width="20" height="20" style="position: absolute; top: 3%; left: 95%">
+		<h1>Pecunia</h1>
+		<a> <img src="../img/carteira.jpg" width="90" height="90"> <img
+			class="icone_sair" src="" onclick="logoff()" width="20" height="20"
+			style="position: absolute; top: 3%; left: 95%">
 
 		</a>
 	</div>
@@ -45,81 +45,123 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<!--  <label>Hora: </label> <input id="hora" name="hora"
 				class="input_geral" type="time">
 			-->
-				
-				 <label>Dia: </label> <input
-				id="data" name="data" class="input_geral" type="date">
+
+			<label>Dia: </label> <input id="data" name="data" class="input_geral"
+				type="date">
 
 
 			<div class=" bt dropdown">
-				<span id="span_descricao"> Descricacao </span> <input type="hidden" id="conta"
-					name="conta"> <input type="hidden" id="subConta" name="subConta">
+				<span id="span_descricao"> Descricacao </span> <input type="hidden"
+					id="conta" name="conta"> <input type="hidden" id="subConta"
+					name="subConta">
 
 
 				<div class="dropdown-content bt">
 					<table>
                                 		
                       <?php
-                                error_reporting(0);
+                    error_reporting(0);
 
-                                $con = new Sql();
+                    $con = new Sql();
 
-                                $menu = $con->menu();
+                    $menu = $con->menu();
 
-                                $id_menu = 50;
+                    $array_conta = array_unique(array_column($menu, 'conta', 'id_conta'));
 
-                                $array_menu[] = $id_menu;                        
+                    $id_menu = 1000;
 
-                                foreach ($menu as $result) {
+                    foreach ($array_conta as $contas) {
 
-                                    $array[] = "";
+                        echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1) , menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $contas . "</td></tr>";
 
-                                    if (! in_array($result[conta], $array)) {
+                        $id_menu += 1;
+                    }
 
-                                        echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1), menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $result[conta] . "</td></tr>";
+                    /*
+                     * $id_menu = 50;
+                     *
+                     * $array_menu[] = $id_menu;
+                     *
+                     * foreach ($menu as $result) {
+                     *
+                     * $array[] = "";
+                     *
+                     * if (! in_array($result[conta], $array)) {
+                     *
+                     * echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1), menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $result[conta] . "</td></tr>";
+                     *
+                     * $id_menu += 1;
+                     *
+                     * array_push($array_menu, $id_menu);
+                     *
+                     * array_push($array, $result[conta]);
+                     *
+                     * }
+                     * }
+                     */
 
-                                        $id_menu += 1;
-
-                                        array_push($array_menu, $id_menu);
-
-                                        array_push($array, $result[conta]);
-                              
-                                    }
-                                }
-
-                         ?>
+                    ?>
                                 		
                         </table>
 
-								<?php
+					<?php
+					
+					$top = 5;
+				
+					for ($i = 1000; $i <  $id_menu; $i++) {
+					    
+					    $sub_menu_id_conta = key($array_conta);
+					    
+					    echo "<div id='$i' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
+					    $top += 23;
+					    
+					    echo "<table>";
+			    
+					    foreach ($menu as $sub_menu) {
+					        
+					        if ($array_conta[$sub_menu_id_conta] == $sub_menu[conta]) {
+					            
+					            echo "<tr class='linha_tabela'><td onclick='menuDescricacao(" . $sub_menu[id_conta] . "," . "\"" . $sub_menu[sub_conta] . "\"" . ")''>" . $sub_menu[sub_conta] . "</td></tr>";
+					        } 
+					    }
+					 
+					    next($array_conta);
+					    
+					    echo "</table>";
+					    echo "</div>";
+					    
+					}
+								
+								
+								
+/* 
+        $top = 5;
+        $i = 0;
+        $z = 0;
+        $array_teste = array_unique(array_column($menu, 'conta')); // cria um novo array com o indice conta e retirar os valores duplicados
 
-                                $top = 5;
-                                $i = 0;
-                                $array_teste =  array_unique(array_column($menu, 'conta'));// cria um novo array com o indice conta e retirar os valores duplicados
-                              
-                            
-                                foreach ($array_menu as $loop){ // substituir por um for
-                                    
-                                    echo "<div id='" . $loop. "' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
-                                    $top += 23;
+        foreach ($array_menu as $loop) { // substituir por for //+count($array_menu)
 
-                                 echo "<table>";
+            echo "<div id='" . $loop . "' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
+            $top += 23;
 
-                                    foreach ($menu as $sub_menu){
-                                 
-                                        if ($array_teste[$i] == $sub_menu[conta]) {
-                                            
-                                            echo "<tr class='linha_tabela'><td onclick='menuDescricacao(".$sub_menu[id_conta].","."\"".$sub_menu[sub_conta]."\"".")''>".$sub_menu[sub_conta]."</td></tr>";
-                                        }
-                                    }                         
-                                 
-                                 echo "</table>";
-                                 echo "</div>";
-                                 
-                                 $i++;
-                             
-                                }//fechamento do primeiro foreach
+            echo "<table>";
 
-                                ?>					
+            foreach ($menu as $sub_menu) {
+
+                if ($array_teste[$i] == $sub_menu[conta]) {
+
+                    echo "<tr class='linha_tabela'><td onclick='menuDescricacao(" . $sub_menu[id_conta] . "," . "\"" . $sub_menu[sub_conta] . "\"" . ")''>" . $sub_menu[sub_conta] . "</td></tr>";
+                }
+            }
+
+            echo "</table>";
+            echo "</div>";
+
+            $i ++;
+        } // fechamento do primeiro foreach
+ */
+        ?>					
 				</div>
 
 			</div>
@@ -177,6 +219,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
 				<th>Data:</th>
+				<th>Natureza::</th>
 				<th>Conta:</th>
 				<th>Sub Conta:</th>
 				<th>Valor:</th>
@@ -213,16 +256,16 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th>Conta</th>" . "<th>Sub Conta</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
         "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
         ?>
-					</tr>
+			</tr>
 								
-					<?php
+	<?php
 
         $i ++;
-        if ($value["natureza"] == "receita") { // guarda separa as despesas e receitas em variáveis
+        if ($value["natureza"] == "Receita") { // guarda separa as despesas e receitas em variáveis
             $receita += $value["valor"];
         } else {
             $despesa += $value["valor"];
@@ -230,7 +273,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
     } // fechamento do foreach
     ?>	
 					
-						</table>
+	</table>
 	</div>
 
 	<!-- tabela dos valorea do canvas, grafico -->
@@ -239,13 +282,11 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 		<table>
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
-					<?php
-    $saldo = $receita - $despesa;
+	<?php
+$saldo = $receita - $despesa;
 
-    echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
-    ?>
-		
-		
+echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+?>
 		
 		</table>
 
