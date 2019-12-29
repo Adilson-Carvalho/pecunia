@@ -15,8 +15,8 @@
 
 
 <?php
-    if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se não pg erro
-        header('Location: ../index.php?erro=1');
+if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se não pg erro
+    header('Location: ../index.php?erro=1');
 }
 
 ?>
@@ -41,130 +41,25 @@
 				Movimentação</h2>
 			<div style="position: relative; bottom: 45px;"></div>
 
-
-			<!--  <label>Hora: </label> <input id="hora" name="hora"
-				class="input_geral" type="time">
-			-->
-
 			<label>Dia: </label> <input id="data" name="data" class="input_geral"
 				type="date">
 
 
-			<div class=" bt dropdown">
+			<div class=" bt dropdown">  <!-- Menu suspensso  -->
 				<span id="span_descricao"> Descricacao </span> <input type="hidden"
 					id="conta" name="conta"> <input type="hidden" id="subConta"
 					name="subConta">
 
 
 				<div class="dropdown-content bt">
-					<table>
-                                		
-                      <?php
-                    error_reporting(0);
-
-                    $con = new Sql();
-
-                    $menu = $con->menu();
-
-                    $array_conta = array_unique(array_column($menu, 'conta', 'id_conta'));
-
-                    $id_menu = 1000;
-
-                    foreach ($array_conta as $contas) {
-
-                        echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1) , menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $contas . "</td></tr>";
-
-                        $id_menu += 1;
-                    }
-
-                    /*
-                     * $id_menu = 50;
-                     *
-                     * $array_menu[] = $id_menu;
-                     *
-                     * foreach ($menu as $result) {
-                     *
-                     * $array[] = "";
-                     *
-                     * if (! in_array($result[conta], $array)) {
-                     *
-                     * echo "<tr class='linha_tabela' onMouseOver='menuLateral($id_menu, 1), menuLateral($id_menu-1, 2), menuLateral($id_menu+1, 2)' ><td>" . $result[conta] . "</td></tr>";
-                     *
-                     * $id_menu += 1;
-                     *
-                     * array_push($array_menu, $id_menu);
-                     *
-                     * array_push($array, $result[conta]);
-                     *
-                     * }
-                     * }
-                     */
-
-                    ?>
-                                		
-                        </table>
-
-					<?php
-					
-					$top = 5;
-				
-					for ($i = 1000; $i <  $id_menu; $i++) {
-					    
-					    $sub_menu_id_conta = key($array_conta);
-					    
-					    echo "<div id='$i' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
-					    $top += 23;
-					    
-					    echo "<table>";
-			    
-					    foreach ($menu as $sub_menu) {
-					        
-					        if ($array_conta[$sub_menu_id_conta] == $sub_menu[conta]) {
-					            
-					            echo "<tr class='linha_tabela'><td onclick='menuDescricacao(" . $sub_menu[id_conta] . "," . "\"" . $sub_menu[sub_conta] . "\"" . ")''>" . $sub_menu[sub_conta] . "</td></tr>";
-					        } 
-					    }
-					 
-					    next($array_conta);
-					    
-					    echo "</table>";
-					    echo "</div>";
-					    
-					}
-								
-								
-								
-/* 
-        $top = 5;
-        $i = 0;
-        $z = 0;
-        $array_teste = array_unique(array_column($menu, 'conta')); // cria um novo array com o indice conta e retirar os valores duplicados
-
-        foreach ($array_menu as $loop) { // substituir por for //+count($array_menu)
-
-            echo "<div id='" . $loop . "' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
-            $top += 23;
-
-            echo "<table>";
-
-            foreach ($menu as $sub_menu) {
-
-                if ($array_teste[$i] == $sub_menu[conta]) {
-
-                    echo "<tr class='linha_tabela'><td onclick='menuDescricacao(" . $sub_menu[id_conta] . "," . "\"" . $sub_menu[sub_conta] . "\"" . ")''>" . $sub_menu[sub_conta] . "</td></tr>";
-                }
-            }
-
-            echo "</table>";
-            echo "</div>";
-
-            $i ++;
-        } // fechamento do primeiro foreach
- */
-        ?>					
+			
+                    <?php
+                    include 'C:\xampp\htdocs\pecunia\view\menu.php';
+                    ?>	
+       	
 				</div>
 
-			</div>
+			</div>  <!-- Fim do Menu suspensso  -->
 
 
 			<div style="display: inline">
@@ -287,6 +182,8 @@ $saldo = $receita - $despesa;
 
 echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
 ?>
+		
+		
 		
 		</table>
 

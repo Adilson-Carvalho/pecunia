@@ -1,11 +1,8 @@
 <?php
 
-require('../class.php/sql.class.php');
-
-echo "<div class=' bt dropdown'>";
-echo "<span id='span_descricao'> Descricacao </span> <input type='hidden' id='conta' name='conta'> <input type='hidden' id='subConta' name='subConta'>";
-echo "<div class='dropdown-content bt'>";
 echo "<table>";
+
+error_reporting(0);
 
 $con = new Sql();
 

@@ -20,8 +20,8 @@
 
 	} 
 
-	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data
-											// atual
+	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data atual
+											
 
 		var optionMes = document.getElementById("option_mes");
 		option_mes.selectedIndex = (mes -1);
@@ -103,17 +103,7 @@
 				ctx.fillRect (10, 300, 120, alturaReceita);
 
 				ctx.fillStyle = "rgb(255, 99, 71)";
-				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));/*
-																			 * cria
-																			 * uma
-																			 * altura
-																			 * porcentage
-																			 * relativa
-																			 * a
-																			 * altura
-																			 * da
-																			 * receita
-																			 */
+				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));//cria uma altura porcentage relativa a altura da receita
 
 				ctx.fillStyle = "rgb(0, 191, 255)";
 				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));/*
@@ -132,16 +122,12 @@
 	
 function menuDescricacao(conta, sub_conta){
 		
-		// $teste.contentEditable = true; //torna editável
-		
 		// input hidden
 		var inputOpcao = document.getElementById('subConta');
 		inputOpcao.value = conta; // atribui a valor input hidden descricao
 		
 		document.getElementById('span_descricao').innerHTML = sub_conta;
-		
-		
-		// ("."\"".$sub_menu[sub_conta]."\"".")
+
 }
 
 
