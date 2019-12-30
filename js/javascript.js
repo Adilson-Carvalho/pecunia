@@ -106,17 +106,8 @@
 				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));//cria uma altura porcentage relativa a altura da receita
 
 				ctx.fillStyle = "rgb(0, 191, 255)";
-				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));/*
-																		 * cria
-																		 * uma
-																		 * altura
-																		 * porcentage
-																		 * relativa
-																		 * a
-																		 * altura
-																		 * da
-																		 * receita
-																		 */
+				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));// cria uma altura porcentagem realativa a altura da receita
+																		
 			}
 	}
 	

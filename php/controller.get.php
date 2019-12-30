@@ -7,7 +7,7 @@ function excluirDados(){
 	$id = $_GET['id'];//pega a ide da lina a ser excluida
 
 	$sql = new Sql( NULL, NULL,NULL,NULL,NULL);
-	$deletar = $sql->excluir($id);
+	$sql->excluir($id);
 
 	header('Location: pgPrincipal.php'); 
 	

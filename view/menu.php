@@ -27,7 +27,7 @@ for ($i = 1000; $i < $id_menu; $i ++) {
 
     $sub_menu_id_conta = key($array_conta);
 
-    echo "<div id='$i' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>";
+    echo "<div id='$i' class='bt' style='display:none; position:absolute; left:107px; top:" . $top . "px'>"; 
     $top += 23;
 
     echo "<table>";

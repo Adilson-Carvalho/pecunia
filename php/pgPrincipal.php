@@ -33,56 +33,60 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 		</a>
 	</div>
 
+	<!-- div mais externa envolve a tabela e o grafico. -->
+	<div class='container'
+		style='height: auto; width: 46%; position: relative; float: left;'>
 
-	<div>
-		<form id="form_principal" class="container" method="post"
-			action="controller.post.php">
-			<h2 style="position: relative; bottom: 15px;">Cadastrar
-				Movimentação</h2>
-			<div style="position: relative; bottom: 45px;"></div>
+		<table>
 
-			<label>Dia: </label> <input id="data" name="data" class="input_geral"
-				type="date">
-
-
-			<div class=" bt dropdown">  <!-- Menu suspensso  -->
-				<span id="span_descricao"> Descricacao </span> <input type="hidden"
-					id="conta" name="conta"> <input type="hidden" id="subConta"
-					name="subConta">
+			<tr class='linha_tabela' style='position: relative; top: 10px;'
+				bgcolor='white'>
+				<th colspan='8'>
 
 
-				<div class="dropdown-content bt">
+					<form id="form_principal" method="post"
+						action="controller.post.php">
+						<div style='position: relative; top: 10px;'>
+							<label>Cadastrar Movimentação</label> <input id="data"
+								name="data" class="input_geral" type="date">
+
+							<!-- Menu suspensso  -->
+
+							<div class=" bt dropdown">
+								<span id="span_descricao"> Descricacao </span> <input
+									type="hidden" id="conta" name="conta"> <input type="hidden"
+									id="subConta" name="subConta">
+
+
+								<div class="dropdown-content bt">
 			
                     <?php
                     include 'C:\xampp\htdocs\pecunia\view\menu.php';
                     ?>	
        	
-				</div>
+						</div>
 
-			</div>  <!-- Fim do Menu suspensso  -->
+							</div>
 
-
-			<div style="display: inline">
-				<label>Valor: </label> <input id="valor" data-thousands=""
-					data-decimal="," name="valor" type="text" placeholder="R$ "> <input
-					type="hidden" id="opcao" name="opcao" value="gravar"> <input
-					type="hidden" id="id_editar" name="id_editar">
-				<button id="bt_cadastrar" type="submit" class="bt">Cadastrar</button>
-			</div>
-
-		</form>
-
-	</div>
+							<!-- Fim do Menu suspensso  -->
 
 
-	<!-- div mais externa envolve a tabela e o grafico. -->
-	<div class='container'
-		style='height: auto; width: 46%; position: relative; float: left;'>
-		<table>
+							<div style="display: inline">
+								<input id="valor" data-thousands="" data-decimal=","
+									name="valor" type="text" placeholder="R$ - Valor "> <input
+									type="hidden" id="opcao" name="opcao" value="gravar"> <input
+									type="hidden" id="id_editar" name="id_editar">
+								<button id="bt_cadastrar" type="submit" class="bt">Cadastrar</button>
+							</div>
+						</div>
+					</form>
 
+				</th>
+			
+			
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
-				<th colspan='6'>
+				<th colspan='8'>
 					<form id="form_pesquisa" method="post">
 						<div style='position: relative; top: 10px;'>
 							<label>Movimentação dos mês:</label> <select id="option_mes"
@@ -114,7 +118,8 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
 				<th>Data:</th>
-				<th>Natureza::</th>
+				<th>Pago:</th>
+				<th>Natureza:</th>
 				<th>Conta:</th>
 				<th>Sub Conta:</th>
 				<th>Valor:</th>
@@ -151,7 +156,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th>" . Pago . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
         "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
         ?>
@@ -182,6 +187,10 @@ $saldo = $receita - $despesa;
 
 echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
 ?>
+		
+		
+		
+		
 		
 		
 		
