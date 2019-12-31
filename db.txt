@@ -8,3 +8,7 @@ CREATE TABLE tb_movimentacoes (id_registro INT NOT NULL AUTO_INCREMENT PRIMARY K
 
 USE bd_registros;
 CREATE TABLE tb_usuarios (id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nome_usuario VARCHAR(50) NOT NULL, senha_usuario VARCHAR(20) NOT NULL);
+
+
+ALTER TABLE tb_plano_de_contas ADD classificacao varchar(10);
+ALTER TABLE tb_movimentacoes ADD pago varchar(10);
