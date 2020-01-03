@@ -7,9 +7,11 @@ require ('conexao.class.php');
 		private $data;
 		private $id_conta;
 		private $sql;
+		private $pago;
 
 		public function __construct($valor = NULL, $data = NULL, $id_conta = NULL){  
 			$this->valor =  $valor;
+			$this->pago = $pago;
 			$this->data = $data;
 			$this->id_conta = $id_conta;
 			$this->sql = new Conexao();
@@ -65,7 +67,7 @@ require ('conexao.class.php');
 
 		public function pesquisar(){
 			
-		    $statement = $this->sql->conectar()->prepare("SELECT tb_movimentacoes.id_registro, tb_movimentacoes.data, tb_plano_de_contas.natureza, tb_plano_de_contas.conta, tb_plano_de_contas.sub_conta,tb_movimentacoes.valor 
+		    $statement = $this->sql->conectar()->prepare("SELECT tb_movimentacoes.id_registro, tb_movimentacoes.data, tb_movimentacoes.pago, tb_plano_de_contas.natureza, tb_plano_de_contas.conta, tb_plano_de_contas.sub_conta,tb_movimentacoes.valor 
                 FROM tb_movimentacoes, tb_plano_de_contas WHERE tb_movimentacoes.fk_conta = tb_plano_de_contas.id_conta
                     AND tb_movimentacoes.data BETWEEN :dataInicial AND :dataFinal;");
 		    
@@ -103,6 +105,15 @@ require ('conexao.class.php');
 			$excluir->execute();
 
 
+		}
+		
+		public function contaPaga($id){
+		    $pago = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET `pago` = 'sim' WHERE `tb_movimentacoes`.`id_registro` = :id;");
+		    
+		    $id = $id;
+		    $pago->bindParam(":id", $id);
+		    $pago->execute();   
+		    
 		}
 
 	}

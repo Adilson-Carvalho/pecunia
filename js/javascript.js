@@ -60,12 +60,8 @@
 	}
 
 	function excluir(id){
-		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona
-																		// pg
-																		// controller.get
-																		// com
-																		// get
-																		// da id
+		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona pg controller.get id
+																	
 	}
 
 	function logoff(){
@@ -136,4 +132,10 @@ function menuLateral(menus, opcao){
 		menu.style.display ="none"; // altera o estilo para visível
 		}
 
+}
+
+function pago(id){
+	
+	location.href = 'controller.get.php?id='+id+'&opcao=pago';
+	
 }

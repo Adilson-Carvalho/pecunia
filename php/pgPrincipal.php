@@ -156,7 +156,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th>" . Pago . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
         "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
         ?>
