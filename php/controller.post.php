@@ -22,8 +22,6 @@ function gravarDados(){
 
 	$cadastraDado->cadastrar();
 	
-	print_r($_POST);
-	
 	unset($_POST);
 
 	header('Location: pgPrincipal.php');

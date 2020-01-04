@@ -7,16 +7,13 @@ require ('conexao.class.php');
 		private $data;
 		private $id_conta;
 		private $sql;
-		private $pago;
-
-		public function __construct($valor = NULL, $data = NULL, $id_conta = NULL){  
-			$this->valor =  $valor;
-			$this->pago = $pago;
+		
+		public function __construct($valor = NULL, $data = NULL,  $id_conta = NULL){  
+		    $this->valor =  $valor;
 			$this->data = $data;
 			$this->id_conta = $id_conta;
 			$this->sql = new Conexao();
 		} 
-
 
 		public function cadastrar(){
 
@@ -84,7 +81,17 @@ require ('conexao.class.php');
 			return $resultado;
 
 		}
+		
+		public function excluir($id){
+		    $excluir = $this->sql->conectar()->prepare("DELETE FROM `tb_movimentacoes` WHERE `tb_movimentacoes`.`id_registro` = :id");
+		    
+		    $excluir->bindParam(":id", $id);
+		    $excluir->execute();
+		    
+		}
+		
 
+		
 		public function menu(){
 		    
 		   $menu = $this->sql->conectar()->prepare("SELECT * FROM `tb_plano_de_contas` ");
@@ -97,23 +104,18 @@ require ('conexao.class.php');
 		    
 		}
 		
-		public function excluir($id){
-			 $excluir = $this->sql->conectar()->prepare("DELETE FROM `tb_movimentacoes` WHERE `tb_movimentacoes`.`id_registro` = :id");
-
-			$id = $id;
-			$excluir->bindParam(":id", $id);
-			$excluir->execute();
-
-
-		}
-		
 		public function contaPaga($id){
-		    $pago = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET `pago` = 'sim' WHERE `tb_movimentacoes`.`id_registro` = :id;");
+		    $pago = $this->sql->conectar()->prepare("SELECT * FROM `tb_plano_de_contas` WHERE tb_plano_de_contas.classificacao = 'fixa' ");
 		    
 		    $id = $id;
 		    $pago->bindParam(":id", $id);
 		    $pago->execute();   
 		    
+		}
+		
+		public function comecoMes(){
+		    $inicio = $this->sql->conectar()->prepare("INSERT INTO tb_movimentacoes (fk_conta, data) SELECT tb_plano_de_contas.id_conta, CURRENT_DATE FROM tb_plano_de_contas WHERE tb_plano_de_contas.classificacao = 'fixo';");
+		    $inicio->execute();
 		}
 
 	}
