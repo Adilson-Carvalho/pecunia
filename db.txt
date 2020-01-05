@@ -1,10 +1,10 @@
 CREATE DATABASE bd_registros;
 
 USE bd_registros;
-CREATE TABLE tb_plano_de_contas (id_conta INT NOT NULL AUTO_INCREMENT PRIMARY KEY, natureza VARCHAR(10) NOT NULL, conta VARCHAR(50) NOT NULL, sub_conta VARCHAR(50) NOT NULL);
+CREATE TABLE tb_plano_de_contas (id_conta INT NOT NULL AUTO_INCREMENT PRIMARY KEY, natureza VARCHAR(10) NOT NULL, classificacao varchar(10) NOT NULL, conta VARCHAR(50) NOT NULL, sub_conta VARCHAR(50) NOT NULL);
 
 USE bd_registros; 
-CREATE TABLE tb_movimentacoes (id_registro INT NOT NULL AUTO_INCREMENT PRIMARY KEY, fk_conta INT, CONSTRAINT id_conta FOREIGN KEY (fk_conta) REFERENCES tb_plano_de_contas (id_conta), valor FLOAT NOT NULL, data DATE NOT NULL);
+CREATE TABLE tb_movimentacoes (id_registro INT NOT NULL AUTO_INCREMENT PRIMARY KEY, fk_conta INT, CONSTRAINT id_conta FOREIGN KEY (fk_conta) REFERENCES tb_plano_de_contas (id_conta), valor FLOAT, pago varchar(10), data DATE);
 
 USE bd_registros;
 CREATE TABLE tb_usuarios (id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY, nome_usuario VARCHAR(50) NOT NULL, senha_usuario VARCHAR(20) NOT NULL);

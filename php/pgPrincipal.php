@@ -61,7 +61,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<div class="dropdown-content bt">
 			
                     <?php
-                    include 'C:\xampp\htdocs\pecunia\view\menu.php';
+                    include '../view/menu.php';
                     ?>	
        	
 						</div>

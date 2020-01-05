@@ -136,6 +136,6 @@ function menuLateral(menus, opcao){
 
 function pago(id){
 	
-	location.href = 'controller.get.php?id='+id+'&opcao=pago';
+	location.href = 'controller.get.php?id='+id+'&opcao=pago ';
 	
 }

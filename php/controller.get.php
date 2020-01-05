@@ -17,9 +17,9 @@ function contaPaga(){
     
     require('../class.php/sql.class.php');
     
-    $id = $_GET['id'];//pega a ide da lina a ser excluida
+    $id = $_GET['id'];//pega a ide da linha
     
-    $sql = new Sql( NULL, NULL,NULL,NULL,NULL);
+    $sql = new Sql();
     $sql->contaPaga($id);
     
     header('Location: pgPrincipal.php');

@@ -105,9 +105,8 @@ require ('conexao.class.php');
 		}
 		
 		public function contaPaga($id){
-		    $pago = $this->sql->conectar()->prepare("SELECT * FROM `tb_plano_de_contas` WHERE tb_plano_de_contas.classificacao = 'fixa' ");
-		    
-		    $id = $id;
+		    $pago = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET `pago` = 'sim' WHERE `tb_movimentacoes`.`id_registro` = :id;");
+		 
 		    $pago->bindParam(":id", $id);
 		    $pago->execute();   
 		    
