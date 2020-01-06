@@ -32,7 +32,7 @@ class Usuario{
 
 			if (isset( $resultado['nome_usuario'])) { // query = true cria o cookie e redireciona p pgPrincipal
 				setcookie('usuNome', $nome, time()+3600);
-				header('Location: ../php/pgPrincipal.php');
+				header('Location: ../php/main.php');
 			}else{
 				header('Location: ../index.php?erro=1');// query = false index com mensagem de erro
 			}

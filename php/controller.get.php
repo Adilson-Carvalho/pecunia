@@ -9,7 +9,7 @@ function excluirDados(){
 	$sql = new Sql();
 	$sql->excluir($id);
 
-	header('Location: pgPrincipal.php'); 
+	header('Location: main.php'); 
 	
 }
 
@@ -22,7 +22,7 @@ function contaPaga(){
     $sql = new Sql();
     $sql->contaPaga($id);
     
-    header('Location: pgPrincipal.php');
+    header('Location: main.php');
     
 }
 

@@ -24,7 +24,7 @@ function gravarDados(){
 	
 	unset($_POST);
 
-	header('Location: pgPrincipal.php');
+	header('Location: main.php');
 	
 }
 
@@ -39,7 +39,7 @@ function editarDados(){
 	
 	unset($_POST);
 
-	header('Location: pgPrincipal.php');
+	header('Location: main.php');
 
 }
 
