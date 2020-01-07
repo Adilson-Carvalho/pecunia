@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Análise e Desenvolvimento de Sistemas – Programação Web</title>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.maskMoney.js"></script>
 <script type="text/javascript" src="../js/javascript.js"></script>
 
@@ -23,11 +24,12 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	</head>
 
 <body onload="onloadForm(); canvas();">
-	
+
 	<div class="container" style="height: 40">
-		<h1 style="position: relative; left:70px">Pecunia</h1>
-		<a> <img src="../img/carteira.jpg" width="50" height="50" style="position: relative; left:-100px"> <img
-			class="icone_sair" src="" onclick="logoff()" width="20" height="20"
+		<h1 style="position: relative; left: 70px">Pecunia</h1>
+		<a> <img src="../img/carteira.jpg" width="50" height="50"
+			style="position: relative; left: -100px"> <img class="icone_sair"
+			src="" onclick="logoff()" width="20" height="20"
 			style="position: absolute; top: 3%; left: 95%">
 
 		</a>
@@ -183,14 +185,15 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
 	<?php
-    $saldo = $receita - $despesa;
+$saldo = $receita - $despesa;
 
-    echo "<th id='canvas_receita' style='background-color:#90EE90'>" 
-    . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" 
-    . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') 
-    . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
-    ?>
+echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+?>
 				
+		
+		
+		
+		
 		</table>
 
 		<canvas id='canvas' width='428' height='300'></canvas>
