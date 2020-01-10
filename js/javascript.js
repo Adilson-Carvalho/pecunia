@@ -21,13 +21,12 @@
 	} 
 
 	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data atual
-											
-
+								
 		var optionMes = document.getElementById("option_mes");
 		option_mes.selectedIndex = (mes -1);
 
 		var optionAno = document.getElementById("option_ano");
-		option_ano.text = ano;
+		option_ano.selectedIndex = (ano - 2019);
 	} 
 
 	function editar(id){

@@ -37,11 +37,11 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 	<!-- div mais externa envolve a tabela e o grafico. -->
 	<div class='container'
-		style='height: auto; width: 46%; position: relative; float: left;'>
+		style='height: auto; width: 710px; position: relative; float: left;'>
 
 		<table>
 
-			<tr class='linha_tabela' style='position: relative; top: 10px;'
+			<tr class='linha_tabela' style='position: relative; top: 10px; '
 				bgcolor='white'>
 				<th colspan='8'>
 
@@ -88,7 +88,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
-				<th colspan='8'>
+				<th colspan='5'>
 					<form id="form_pesquisa" method="post">
 						<div style='position: relative; top: 10px;'>
 							<label>Movimentação dos mês:</label> <select id="option_mes"
@@ -105,7 +105,8 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<option value='10'>Outubro</option>
 								<option value='11'>Novembro</option>
 								<option value='12'>Dezembro</option>
-							</select> <select id="option_ano" name="ano">
+							</select> 
+							<select id="option_ano" name="ano">
 								<option value='2019'>2019</option>
 								<option value='2020'>2020</option>
 								<option value='2021'>2021</option>
@@ -114,6 +115,13 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 							<button id="bt_atualizar_pesquiza">Atualizar</button>
 						</div>
 					</form>
+				</th>
+				
+				<th colspan='3' >
+				<form   method="post" action="controller.post.php">
+				<button class="bt" id="bt_cadastrar_fixos" type="submit" style='position: relative; top: 10px;'>Cadastras in&#237;cio do m&#234;s</button>
+				<input type="hidden" id="opcao" name="opcao" value="inicio_de_mes">
+				</form>
 				</th>
 			
 			
@@ -132,7 +140,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
     // carrega a pgprincipal com as movimentações do mês corrente
 
     if (isset($_POST['ano'])) { // verifica se o post foi carregado
-        $data = $_POST['ano'] . "-" . $_POST['mes'];
+        $data = $_POST['ano'] . "/" . $_POST['mes'];
         $mes = $_POST['mes'];
         $ano = $_POST['ano'];
     } else { // atribui data atual se o post for vazio
@@ -140,6 +148,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
         $mes = date('m');
         $ano = date('Y');
     }
+    
 
     echo "<script>optionDataHoraAtual($mes, $ano)</script>"; // option com a data do if retro
 
@@ -180,7 +189,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 	<!-- tabela dos valorea do canvas, grafico -->
 	<div class='container'
-		style='position: relative; float: left; width: 47%; height: 100%;'>
+		style='position: relative; float: left; height: 100%;'>
 		<table>
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 

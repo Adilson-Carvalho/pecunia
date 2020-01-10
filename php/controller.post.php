@@ -43,6 +43,20 @@ function editarDados(){
 
 }
 
+function inicioDespesasFixas(){
+    
+    require('../class.php/sql.class.php');
+    
+    $inicioDoMes = new Sql(); // 
+    
+    $inicioDoMes->comecoMes();//
+    
+    unset($_POST);
+    
+   header('Location: main.php');
+    
+}
+
 if(isset($_POST)) {// verifica se existe o array
 	$opcao = $_POST['opcao'];
 
@@ -52,6 +66,9 @@ if(isset($_POST)) {// verifica se existe o array
 		     break;
 		case "gravar":
 		    gravarDados();
+		    break;
+		case "inicio_de_mes":
+		    inicioDespesasFixas();
 		    break;
 		case "editar":
 		    editarDados();

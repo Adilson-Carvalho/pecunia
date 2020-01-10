@@ -50,10 +50,9 @@ class Conta
     public function __toString()
     {
         // $x = func_get_args(); devolve quantos argumentos um metodo recebeu
-        if (is_null($this->sub_conta)) {// se o atributo sub_conta estiver vazio ele imprime o menu, se não estiver imprime o sub menu. 
+        if (is_null($this->sub_conta)) { // se o atributo sub_conta estiver vazio ele imprime o menu, se não estiver imprime o sub menu.
             return "<tr class='linha_tabela' onMouseOver='menuLateral($this->id_conta, 1) , menuLateral($this->id_conta-1, 2), menuLateral($this->id_conta+1, 2)' ><td>" . $this->conta . "</td></tr>";
-        } 
-        else {
+        } else {
             return "<tr class='linha_tabela'><td onclick='menuDescricacao(" . $this->id_conta . "," . "\"" . $this->sub_conta . "\"" . ")''>" . $this->sub_conta . "</td></tr>";
         }
     }

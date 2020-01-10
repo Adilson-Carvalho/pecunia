@@ -111,6 +111,7 @@ class Sql
 
     public function comecoMes()
     {
+
         $inicio = $this->sql->conectar()->prepare("INSERT INTO tb_movimentacoes (fk_conta, data) SELECT tb_plano_de_contas.id_conta, CURRENT_DATE FROM tb_plano_de_contas WHERE tb_plano_de_contas.classificacao = 'fixo';");
         $inicio->execute();
     }
