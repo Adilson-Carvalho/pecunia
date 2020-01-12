@@ -72,6 +72,7 @@
 				$('#valor').maskMoney();
 	})
 
+	
 	function canvas(){
 
 		// recupera os valores das celulas retira as palavras e os cifrões e a
@@ -105,6 +106,29 @@
 																		
 			}
 	}
+	
+	
+	function canvas_detalhada(){
+		
+		
+		
+		var canvas_det = document.getElementById("canvas_det");
+			
+		//if (canvas_det.getContext) {
+			var ctx_d = canvas_det.getContext("2d");
+		
+		ctx_d.fillStyle = "rgb(255,255,0)";
+		ctx_d.fillRect (10, 100, 120, 10);
+		
+		/*
+		ctx_d.fillStyle = "rgb(255, 99, 71)";
+		ctx_d.fillRect (155, 300, 120, 30));//cria uma altura porcentage relativa a altura da receita
+
+		ctx_d.fillStyle = "rgb(0, 191, 255)";
+		ctx_d.fillRect (300, 300, 120, 30);// cria uma altura porcentagem realativa a altura da receita
+		*/
+	}
+	
 	
 function menuDescricacao(conta, sub_conta){
 		

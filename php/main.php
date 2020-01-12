@@ -41,7 +41,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 		<table>
 
-			<tr class='linha_tabela' style='position: relative; top: 10px; '
+			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
 				<th colspan='8'>
 
@@ -105,8 +105,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<option value='10'>Outubro</option>
 								<option value='11'>Novembro</option>
 								<option value='12'>Dezembro</option>
-							</select> 
-							<select id="option_ano" name="ano">
+							</select> <select id="option_ano" name="ano">
 								<option value='2019'>2019</option>
 								<option value='2020'>2020</option>
 								<option value='2021'>2021</option>
@@ -116,12 +115,14 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 						</div>
 					</form>
 				</th>
-				
-				<th colspan='3' >
-				<form   method="post" action="controller.post.php">
-				<button class="bt" id="bt_cadastrar_fixos" type="submit" style='position: relative; top: 10px;'>Cadastras in&#237;cio do m&#234;s</button>
-				<input type="hidden" id="opcao" name="opcao" value="inicio_de_mes">
-				</form>
+
+				<th colspan='3'>
+					<form method="post" action="controller.post.php">
+						<button class="bt" id="bt_cadastrar_fixos" type="submit"
+							style='position: relative; top: 10px;'>Cadastras in&#237;cio do
+							m&#234;s</button>
+						<input type="hidden" id="opcao" name="opcao" value="inicio_de_mes">
+					</form>
 				</th>
 			
 			
@@ -148,7 +149,6 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
         $mes = date('m');
         $ano = date('Y');
     }
-    
 
     echo "<script>optionDataHoraAtual($mes, $ano)</script>"; // option com a data do if retro
 
@@ -190,26 +190,31 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	<!-- tabela dos valorea do canvas, grafico -->
 	<div class='container'
 		style='position: relative; float: left; height: 100%;'>
+		
 		<table>
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
 	<?php
-$saldo = $receita - $despesa;
+    $saldo = $receita - $despesa;
 
-echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
-?>
-				
-		
-		
+    echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+    ?>
+					
 		
 		
 		</table>
+		
+		
 
 		<canvas id='canvas' width='428' height='300'></canvas>
+		
+		<canvas id='canvas_det' style="border: 1px solid black;" width='428' height='300'></canvas>
+		
+		<script type="text/javascript">canvas_detalhada()</script>
+
 
 	</div>
-
-
+	
 
 </body>
 </html>
