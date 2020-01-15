@@ -155,7 +155,9 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
     $pesquisarDado = new Sql(NULL, $data);
 
     $resultado = $pesquisarDado->pesquisar();
-
+    
+    $canvas_despesas = array_unique(array_column($resultado,  'valor'));
+    
     unset($_POST);
 
     $i = 0;
@@ -174,7 +176,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			</tr>
 								
 	<?php
-
+	
         $i ++;
         if ($value["natureza"] == "Receita") { // guarda separa as despesas e receitas em variáveis
             $receita += $value["valor"];
@@ -195,9 +197,13 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
 	<?php
+
     $saldo = $receita - $despesa;
+    
 
     echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+    
+    
     ?>
 					
 		
@@ -210,8 +216,24 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 		
 		<canvas id='canvas_det' style="border: 1px solid black;" width='428' height='300'></canvas>
 		
-		<script type="text/javascript">canvas_detalhada()</script>
-
+		<?php 
+		
+		//var_dump($canvas_despesas);
+		
+		echo "<script type='text/javascript'> var arr = []; </script>";
+		
+		foreach ($canvas_despesas as $teste){
+		    
+		  echo "<script type='text/javascript'> arr.push(".$teste ."); </script>";
+		  
+		 // echo $teste;
+		}
+		
+		echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
+     		
+		?>
+		
+	
 
 	</div>
 	
