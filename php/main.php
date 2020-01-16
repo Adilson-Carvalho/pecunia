@@ -155,9 +155,9 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
     $pesquisarDado = new Sql(NULL, $data);
 
     $resultado = $pesquisarDado->pesquisar();
-    
-    $canvas_despesas = array_unique(array_column($resultado,  'valor'));
-    
+
+    $canvas_despesas = array_unique(array_column($resultado, 'conta'));
+
     unset($_POST);
 
     $i = 0;
@@ -176,7 +176,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 			</tr>
 								
 	<?php
-	
+
         $i ++;
         if ($value["natureza"] == "Receita") { // guarda separa as despesas e receitas em variáveis
             $receita += $value["valor"];
@@ -192,51 +192,69 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	<!-- tabela dos valorea do canvas, grafico -->
 	<div class='container'
 		style='position: relative; float: left; height: 100%;'>
-		
+
 		<table>
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
 	<?php
 
-    $saldo = $receita - $despesa;
-    
+$saldo = $receita - $despesa;
 
-    echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
-    
-    
-    ?>
+echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+
+?>
 					
 		
 		
+		
+		
 		</table>
-		
-		
+
+
 
 		<canvas id='canvas' width='428' height='300'></canvas>
+
+		<canvas id='canvas_det' style="border: 1px solid black;" width='428'
+			height='300'></canvas>
 		
-		<canvas id='canvas_det' style="border: 1px solid black;" width='428' height='300'></canvas>
-		
-		<?php 
-		
-		//var_dump($canvas_despesas);
-		
-		echo "<script type='text/javascript'> var arr = []; </script>";
-		
-		foreach ($canvas_despesas as $teste){
-		    
-		  echo "<script type='text/javascript'> arr.push(".$teste ."); </script>";
-		  
-		 // echo $teste;
-		}
-		
-		echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
-     		
-		?>
+		<?php
+$valores = array();
+
+for ($y = 0; $y < count($canvas_despesas); $y ++) {
+
+    for ($x = 0; $x < count($resultado); $x ++) {
+        if ( $resultado[$x]['conta'] == $canvas_despesas[$y]) {
+            $valores[$y] += floatval($resultado[$x]['valor'])/floatval($resultado[0]['valor'])*300;
+        }
+    }
+}
+
+function proporcao($item) {
+    return  item/7250*280;
+}
+
+
+echo "<script type='text/javascript'> var arr = []; </script>";
+
+$z = 0;
+foreach ($valores as $arr) {
+
+    echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
+    echo "<br><br>";
+    echo "<br><span>".$z. " = ". $canvas_despesas[$z]." = R$ ". $arr/300*floatval($resultado[0]['valor']) . "</span>";
+    $z++;
+}
+
+echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
+
+
+
+?>
 		
 	
 
 	</div>
-	
+
 
 </body>
 </html>
