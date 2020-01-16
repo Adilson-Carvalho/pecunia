@@ -110,8 +110,6 @@
 	
 	function canvas_detalhada(arr){
 		
-		console.log(arr);
-		console.log(arr.length);
 		
 		var canvas_det = document.getElementById("canvas_det");
 			
@@ -119,12 +117,12 @@
 			var ctx_d = canvas_det.getContext("2d");
 		
 		var i = 0;
-		var position = 10;
+		var position = 5;
 		
 		for ( i = 0; i <= arr.length; i++){
 			ctx_d.fillStyle = "rgb(255,255,0)";
-			ctx_d.fillRect (position, 300, 50, - arr[i]);
-			position += 60;
+			ctx_d.fillRect (position, 300, (canvas_det.width/(arr.length))-5, - arr[i]);
+			position += (canvas_det.width/(arr.length));
 		}
 		
 	}

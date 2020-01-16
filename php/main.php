@@ -158,6 +158,10 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
     $canvas_despesas = array_unique(array_column($resultado, 'conta'));
 
+    //var_dump($resultado);
+    
+    echo ($resultado[9]['conta']);
+
     unset($_POST);
 
     $i = 0;
@@ -208,6 +212,8 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 		
 		
 		
+		
+		
 		</table>
 
 
@@ -218,36 +224,33 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 			height='300'></canvas>
 		
 		<?php
+
 $valores = array();
 
-for ($y = 0; $y < count($canvas_despesas); $y ++) {
-
-    for ($x = 0; $x < count($resultado); $x ++) {
-        if ( $resultado[$x]['conta'] == $canvas_despesas[$y]) {
-            $valores[$y] += floatval($resultado[$x]['valor'])/floatval($resultado[0]['valor'])*300;
+for ($y = 0; $y <= count($canvas_despesas)+1; $y++ ) {
+    
+    for ($x = 0; $x <= count($resultado)+1; $x ++) {
+        if ($canvas_despesas[$y] == $resultado[$x]['conta'] ) {
+            $valores[$y] += floatval($resultado[$x]['valor']) / floatval($resultado[0]['valor']) * 300;
         }
     }
 }
-
-function proporcao($item) {
-    return  item/7250*280;
-}
-
 
 echo "<script type='text/javascript'> var arr = []; </script>";
 
 $z = 0;
 foreach ($valores as $arr) {
+    
+    if($arr > 0){
 
     echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
     echo "<br><br>";
-    echo "<br><span>".$z. " = ". $canvas_despesas[$z]." = R$ ". $arr/300*floatval($resultado[0]['valor']) . "</span>";
-    $z++;
+    echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 300 * floatval($resultado[0]['valor']) . "</span>";
+    }
+    $z ++;
 }
 
 echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
-
-
 
 ?>
 		
