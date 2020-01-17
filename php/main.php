@@ -156,12 +156,8 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
     $resultado = $pesquisarDado->pesquisar();
 
-    $canvas_despesas = array_unique(array_column($resultado, 'conta'));
-
-    //var_dump($resultado);
-    
-    echo ($resultado[9]['conta']);
-
+    $canvas_despesas = array_values(array_unique(array_column($resultado, 'conta'))); // cria um novo array com a coluna conta, retira as variaveis repetidas,
+                                                                                      // cria um novo array em ordem
     unset($_POST);
 
     $i = 0;
@@ -208,18 +204,14 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 
 ?>
 					
-		
-		
-		
-		
-		
-		
 		</table>
 
-
-
-		<canvas id='canvas' width='428' height='300'></canvas>
-
+		<canvas id='canvas' width='428' height='300' ></canvas>
+		
+		<br><br>
+		
+		<div style="border:1px solid #25692A; display:inline-block; font-family:Verdana; font-weight:bold; font-size:15px; padding: 4px;">
+		<div style="border:1px solid #25692A; font-family:Verdana; font-weight:bold; font-size:20px; padding: 4px; ">Despesas Detalhadas</div>
 		<canvas id='canvas_det' style="border: 1px solid black;" width='428'
 			height='300'></canvas>
 		
@@ -227,11 +219,11 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 
 $valores = array();
 
-for ($y = 0; $y <= count($canvas_despesas)+1; $y++ ) {
-    
-    for ($x = 0; $x <= count($resultado)+1; $x ++) {
-        if ($canvas_despesas[$y] == $resultado[$x]['conta'] ) {
-            $valores[$y] += floatval($resultado[$x]['valor']) / floatval($resultado[0]['valor']) * 300;
+for ($y = 0; $y <= count($canvas_despesas); $y ++) {
+
+    for ($x = 0; $x <= count($resultado) + 1; $x ++) {
+        if ($canvas_despesas[$y] == $resultado[$x]['conta']) {
+            $valores[$y] += floatval($resultado[$x]['valor']) / floatval($resultado[0]['valor']) * 290;
         }
     }
 }
@@ -240,12 +232,12 @@ echo "<script type='text/javascript'> var arr = []; </script>";
 
 $z = 0;
 foreach ($valores as $arr) {
-    
-    if($arr > 0){
 
-    echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
-    echo "<br><br>";
-    echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 300 * floatval($resultado[0]['valor']) . "</span>";
+    if ($arr > 0) {
+
+        echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
+        echo "<br>";
+        echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 290 * floatval($resultado[0]['valor']) . "</span>";
     }
     $z ++;
 }
@@ -253,7 +245,7 @@ foreach ($valores as $arr) {
 echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
 
 ?>
-		
+</div>	
 	
 
 	</div>

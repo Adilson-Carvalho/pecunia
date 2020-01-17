@@ -110,7 +110,6 @@
 	
 	function canvas_detalhada(arr){
 		
-		
 		var canvas_det = document.getElementById("canvas_det");
 			
 		if (canvas_det.getContext) 
@@ -120,8 +119,14 @@
 		var position = 5;
 		
 		for ( i = 0; i <= arr.length; i++){
-			ctx_d.fillStyle = "rgb(255,255,0)";
+			//números
+			ctx_d.fillStyle = 'black';
+			ctx_d.font = "15px Arial";
+			ctx_d.fillText(i,position+canvas_det.width/(arr.length)/2.7,290);
+			//barras
+			ctx_d.fillStyle = "rgba("+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+" ,0.3)";	//último número é a transparencia		
 			ctx_d.fillRect (position, 300, (canvas_det.width/(arr.length))-5, - arr[i]);
+			
 			position += (canvas_det.width/(arr.length));
 		}
 		
