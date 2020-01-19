@@ -101,20 +101,25 @@ class Sql
         return $resultado;
     }
 
-    public function contaPaga($id)
+    public function contaPaga()
     {
-        $pago = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET `pago` = 'sim' WHERE `tb_movimentacoes`.`id_registro` = :id;");
-
-        $pago->bindParam(":id", $id);
+      
+        $pago = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET `data` = CURRENT_DATE, `pago` = 'sim' WHERE `tb_movimentacoes`.`id_registro` = :id;");
+        
+        $pago->bindParam(":id", $this->id_conta);
         $pago->execute();
     }
 
     public function comecoMes()
     {
-
         $inicio = $this->sql->conectar()->prepare("INSERT INTO tb_movimentacoes (fk_conta, data) SELECT tb_plano_de_contas.id_conta, CURRENT_DATE FROM tb_plano_de_contas WHERE tb_plano_de_contas.classificacao = 'fixo';");
         $inicio->execute();
     }
+    
+    public function __toString(){
+        return "ID = ".$this->id_conta." - DATA = ".$this->data." - VALOR = ".$this->valor;
+    }
+    
 }
 
 ?>

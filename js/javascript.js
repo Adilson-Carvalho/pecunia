@@ -31,6 +31,26 @@
 
 	function editar(id){
 		
+		var valor = document.getElementById(id+" valor_linha");
+		
+		valor.contentEditable = true;
+		
+		valor.innerHTML = "";
+			
+		var data = document.getElementById(id+" data_linha");
+		
+		data.innerHTML = "";
+		
+		var calendario = document.createElement('input');
+		
+		data.appendChild(calendario).type = "date";
+		
+		calendario.id = 'alterar_data'
+		
+		console.log(calendario);
+		
+		
+		/*
 		// input hidden
 		var inputOpcao = document.getElementById('opcao');
 		inputOpcao.value = 'editar'; // atribui a opção editra ao input
@@ -50,12 +70,10 @@
 		document.getElementById('descricao').value = document.getElementById(celulaDescricao).innerHTML;
 		
 		var celulaValor = id+" valor_linha";
-		document.getElementById('valor').value =  document.getElementById(celulaValor).innerHTML.substring(3); // tira
-																												// o
-																												// R$.
-
+		document.getElementById('valor').value =  document.getElementById(celulaValor).innerHTML.substring(3); // tira// R$.
+		
 		document.getElementById('bt_cadastrar').innerHTML = "Editar";
-	
+		*/
 	}
 
 	function excluir(id){
@@ -89,7 +107,7 @@
 		    if (canvas.getContext) {
 				var ctx = canvas.getContext("2d");
 
-				var alturaReceita = -280;
+				var alturaReceita = -290;
 				if(receita == 0){// cria uma referencia quando não há receita
 					alturaReceita = 0;
 					receita = 1;
@@ -99,10 +117,10 @@
 				ctx.fillRect (10, 300, 120, alturaReceita);
 
 				ctx.fillStyle = "rgb(255, 99, 71)";
-				ctx.fillRect (155, 300, 120, -((despesa/receita) * 280));//cria uma altura porcentage relativa a altura da receita
+				ctx.fillRect (155, 300, 120, -((despesa/receita) * 290));//cria uma altura porcentage relativa a altura da receita
 
 				ctx.fillStyle = "rgb(0, 191, 255)";
-				ctx.fillRect (300, 300, 120, -((saldo/receita) * 280));// cria uma altura porcentagem realativa a altura da receita
+				ctx.fillRect (300, 300, 120, -((saldo/receita) * 290));// cria uma altura porcentagem realativa a altura da receita
 																		
 			}
 	}
@@ -124,7 +142,7 @@
 			ctx_d.font = "15px Arial";
 			ctx_d.fillText(i,position+canvas_det.width/(arr.length)/2.7,290);
 			//barras
-			ctx_d.fillStyle = "rgba("+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+" ,0.3)";	//último número é a transparencia		
+			ctx_d.fillStyle = "rgba("+Math.floor(Math.random() * 100)+","+Math.floor(Math.random() * 200)+","+Math.floor(Math.random() * 100)+" ,0.3)";	//último número é a transparencia		
 			ctx_d.fillRect (position, 300, (canvas_det.width/(arr.length))-5, - arr[i]);
 			
 			position += (canvas_det.width/(arr.length));

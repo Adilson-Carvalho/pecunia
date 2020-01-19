@@ -19,8 +19,8 @@ function contaPaga(){
     
     $id = $_GET['id'];//pega a ide da linha
     
-    $sql = new Sql();
-    $sql->contaPaga($id);
+    $sql = new Sql(null,null,$id);
+    $sql->contaPaga();
     
     header('Location: main.php');
     
