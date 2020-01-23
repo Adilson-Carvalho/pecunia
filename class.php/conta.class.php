@@ -49,7 +49,7 @@ class Conta
 
     public function __toString()
     {
-        // $x = func_get_args(); devolve quantos argumentos um metodo recebeu
+        //utf8_encode ()
         if (is_null($this->sub_conta)) { // se o atributo sub_conta estiver vazio ele imprime o menu, se não estiver imprime o sub menu.
             return "<tr class='linha_tabela' onMouseOver='menuLateral($this->id_conta, 1) , menuLateral($this->id_conta-1, 2), menuLateral($this->id_conta+1, 2)' ><td>" . $this->conta . "</td></tr>";
         } else {

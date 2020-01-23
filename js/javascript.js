@@ -33,10 +33,24 @@
 		
 		var valor = document.getElementById(id+" valor_linha");
 		
-		valor.contentEditable = true;
-		
 		valor.innerHTML = "";
-			
+		
+		var input = document.createElement('input');
+		
+		valor.appendChild(input);
+		
+		input.id = 'alterar_valor'+id;
+		
+		console.log(input.id);
+		
+		$(function() {$('#alterar_valor'+id).maskMoney();})
+		
+		//input.pattern="[1-9]{}";
+		
+		//input.title = "Entre com valores numericos";
+		
+		
+		
 		var data = document.getElementById(id+" data_linha");
 		
 		data.innerHTML = "";
@@ -47,34 +61,19 @@
 		
 		calendario.id = 'alterar_data'
 		
-		console.log(calendario);
 		
+			
+		var editar = document.getElementById(id+" editar");
 		
-		/*
-		// input hidden
-		var inputOpcao = document.getElementById('opcao');
-		inputOpcao.value = 'editar'; // atribui a opção editra ao input
-										// hidden opcao
-		// input hidden
-		var inputId = document.getElementById('id_editar');
-		inputId.value = id; // atribui o valor do id ao input hidden id
-
-		// carrega o form com o valor a ser editado
-		var celulaHora = id+" hora_linha";
-		document.getElementById('hora').value = document.getElementById(celulaHora).innerHTML.substring(0, 5);
+		editar.class='icone_tabela';  
 		
-		var celulaData = id+" data_linha";
-		document.getElementById('data').value = document.getElementById(celulaData).innerHTML;
-
-		var celulaDescricao = id+" descricao_linha";
-		document.getElementById('descricao').value = document.getElementById(celulaDescricao).innerHTML;
+		editar.src='../img/salvar.png';
 		
-		var celulaValor = id+" valor_linha";
-		document.getElementById('valor').value =  document.getElementById(celulaValor).innerHTML.substring(3); // tira// R$.
-		
-		document.getElementById('bt_cadastrar').innerHTML = "Editar";
-		*/
+		editar.onclick= function (){
+			console.log(id);
+		}
 	}
+	
 
 	function excluir(id){
 		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona pg controller.get id

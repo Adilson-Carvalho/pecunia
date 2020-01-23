@@ -169,14 +169,15 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
+        "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
-        "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
+        "<th>" . "<a> <img id='$id_linha editar' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
         ?>
 			</tr>
 								
 	<?php
-
+	
         $i ++;
         if ($value["natureza"] == "Receita") { // guarda separa as despesas e receitas em variáveis
             $receita += $value["valor"];
@@ -193,6 +194,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	<div class='container'
 		style='position: relative; float: left; height: 100%;'>
 
+	<div style="border:1px solid #25692A; display:inline-block; padding: 4px;">
 		<table>
 			<tr class='linha_tabela' style='position: relative; top: 10px;'>
 
@@ -200,13 +202,17 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 $saldo = $receita - $despesa;
 
-echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . "<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . "<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . 
+"<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . 
+"<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
 
 ?>
 					
 		</table>
 
 		<canvas id='canvas' width='428' height='300' ></canvas>
+		</div>
+		
 		
 		<br><br>
 		
@@ -237,7 +243,7 @@ foreach ($valores as $arr) {
 
         echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
         echo "<br>";
-        echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 290 * floatval($resultado[0]['valor']) . "</span>";
+        echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 290 * floatval($resultado[0]['valor']) . "</span>"; //utf8_encode ()
     }
     $z ++;
 }
@@ -245,10 +251,13 @@ foreach ($valores as $arr) {
 echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
 
 ?>
-</div>	
-	
 
-	</div>
+
+
+</div>	
+
+
+</div>
 
 
 </body>

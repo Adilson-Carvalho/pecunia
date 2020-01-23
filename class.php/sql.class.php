@@ -43,8 +43,11 @@ class Sql
         return $retorno;
     }
 
-    public function editar($id)
+    public static function editar()
     { // Edita a linha com o id passado por parametro
+         
+        /* $id
+        
         $resultado = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET natureza = :natureza, valor = :valor, descr_registro = :descricao, data = :data, hora = :hora WHERE id_registro = :id ;");
 
         $natureza_p = $this->natureza;
@@ -61,6 +64,8 @@ class Sql
         $resultado->bindParam(":hora", $hora_p);
 
         $resultado->execute();
+        
+        */
     }
 
     public function pesquisar()
