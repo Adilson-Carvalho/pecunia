@@ -34,6 +34,7 @@ function logoff(){
 }
 
 
+
 if(isset($_GET)) {// verifica se existe o array
 	$opcao = $_GET['opcao'];
 

@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" type="text/css" href="../css/estilo.css">
 
-<?php require('../class.php/sql.class.php'); ?>
+<?php require_once('../class.php/sql.class.php'); ?>
 
 
 <?php
@@ -74,10 +74,9 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 
 							<div style="display: inline">
-								<input id="valor" data-thousands="" data-decimal=","
+								<input id="valor" 
 									name="valor" type="text" placeholder="R$ - Valor "> <input
-									type="hidden" id="opcao" name="opcao" value="gravar"> <input
-									type="hidden" id="id_editar" name="id_editar">
+									type="hidden" id="opcao" name="opcao" value="gravar"> 
 								<button id="bt_cadastrar" type="submit" class="bt">Cadastrar</button>
 							</div>
 						</div>
@@ -136,7 +135,10 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 				<th>Valor:</th>
 				<th>Editar</th>
 				<th>Excluir</th>
-
+	
+	
+ 	
+	
 					<?php
     // carrega a pgprincipal com as movimentações do mês corrente
 
@@ -166,7 +168,6 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
     foreach ($resultado as $value) {
         $cor = (($i % 2 == 0) ? "#F2FBEF" : "#DCDCDC"); // cria a tabela zebrada.
         $id_linha = $value["id_registro"];
-
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
         echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
@@ -186,13 +187,22 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
         }
     } // fechamento do foreach
     ?>	
-					
+  
+		
 	</table>
+	
 	</div>
+		
+		
+ <form id="form_tabela" method="post" action="controller.post.php"> 
+  <input type="hidden"  name="id" id="id_editar" value="editar"> 
+ 	 <input type="hidden" name="valor" id="valor_editar"> 
+ 	 <input type="hidden" name="data" id="data_editar">
+   <input type="hidden" name="opcao" id="opcao" value="editar"> 
+</form> 
 
 	<!-- tabela dos valorea do canvas, grafico -->
-	<div class='container'
-		style='position: relative; float: left; height: 100%;'>
+	<div class='container' style='position: relative; float: left; height: 100%;'>
 
 	<div style="border:1px solid #25692A; display:inline-block; padding: 4px;">
 		<table>

@@ -32,8 +32,8 @@
 	function editar(id){
 		
 		var valor = document.getElementById(id+" valor_linha");
-		
 		valor.innerHTML = "";
+		
 		
 		var input = document.createElement('input');
 		
@@ -41,14 +41,7 @@
 		
 		input.id = 'alterar_valor'+id;
 		
-		console.log(input.id);
-		
-		$(function() {$('#alterar_valor'+id).maskMoney();})
-		
-		//input.pattern="[1-9]{}";
-		
-		//input.title = "Entre com valores numericos";
-		
+		$(function() {$('#alterar_valor'+id).maskMoney({decimal:".",thousands:"" });})
 		
 		
 		var data = document.getElementById(id+" data_linha");
@@ -60,17 +53,25 @@
 		data.appendChild(calendario).type = "date";
 		
 		calendario.id = 'alterar_data'
-		
-		
+			
 			
 		var editar = document.getElementById(id+" editar");
 		
 		editar.class='icone_tabela';  
 		
 		editar.src='../img/salvar.png';
+
 		
 		editar.onclick= function (){
-			console.log(id);
+			document.getElementById('data_editar').value = calendario.value;
+			document.getElementById('valor_editar').value = input.value;
+			document.getElementById('id_editar').value = id;
+			
+			console.log(document.getElementById('id_editar'))
+			
+			var form = document.getElementById("form_tabela");
+			form.submit();
+			
 		}
 	}
 	
@@ -84,10 +85,12 @@
 		location.href = 'controller.get.php?opcao=logoff' // redireciona pg de
 															// logoff.php
 	}
-
-	$(function() { // coloca a mascara de moeda no input valor.
-				$('#valor').maskMoney();
-	})
+	
+	$(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
+	
+	//$(function() { // coloca a mascara de moeda no input valor.
+	//			$('#valor').maskMoney();
+	//})
 
 	
 	function canvas(){
@@ -164,7 +167,6 @@ function menuDescricacao(conta, sub_conta){
 function menuLateral(menus, opcao){
 	
 	// $teste.contentEditable = true; //torna editável
-	// input hidden
 
 	var menu = document.getElementById(menus);
 

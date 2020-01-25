@@ -1,6 +1,6 @@
 <?php
 
-require ('conexao.class.php');
+require_once('conexao.class.php');
 
 class Usuario{
 	private $sql;

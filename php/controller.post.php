@@ -1,4 +1,5 @@
 <?php
+require_once('../class.php/sql.class.php');
 
 function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
@@ -16,8 +17,6 @@ function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
 function gravarDados(){
 
-	require('../class.php/sql.class.php');
-	
 	$cadastraDado = new Sql(str_replace(',', '.', $_POST['valor']), $_POST['data'], $_POST['subConta']);//$_POST['id_conta']);// str_replace substitui a virgula por ponto
 
 	$cadastraDado->cadastrar();
@@ -28,19 +27,18 @@ function gravarDados(){
 	
 }
 
-
 function editarDados(){
-
-	require('../class.php/sql.class.php');
-
-	$cadastraDado = new Sql( $_POST['natureza'],  str_replace(',', '.', $_POST['valor']), $_POST['decricao'], $_POST['data'], $_POST['hora']); // str_replace substitui a virgula por ponto
-	
-	$cadastraDado->editar($_POST['id_editar']);//o id é passado por paremetro
-	
-	unset($_POST);
-
-	header('Location: main.php');
-
+    
+    require_once('../class.php/registro.class.php');
+    
+    $registro = new Registro($_POST['valor'], $_POST['data'], $_POST['id']);
+    
+    Sql::editar($registro);
+    
+    unset($_POST);
+    
+    header('Location: main.php');
+    
 }
 
 function inicioDespesasFixas(){

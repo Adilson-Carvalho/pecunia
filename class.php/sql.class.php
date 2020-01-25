@@ -1,5 +1,6 @@
 <?php
-require ('conexao.class.php');
+require_once ('conexao.class.php');
+
 
 class Sql
 {
@@ -31,41 +32,26 @@ class Sql
         $resultado->bindParam(":id_conta", $id_conta_p);
         $resultado->bindParam(":valor", $valor_p);
         $resultado->bindParam(":data", $data_p);
-
+       
         $resultado->execute();
 
-        if ($resultado) {
-            $retorno = true;
-        } else {
-            $retorno = false;
-        }
-
-        return $retorno;
     }
 
-    public static function editar()
-    { // Edita a linha com o id passado por parametro
-         
-        /* $id
+    public static function editar($registro)
+    {
+        $conexao = new Conexao();
+       
+        $resultado = $conexao->conectar()->prepare("UPDATE `tb_movimentacoes` SET `valor` = :valor, `data` = :data WHERE `tb_movimentacoes`.`id_registro` = :id;"); 
+
+        $valor = $registro->getValor();
+        $data = $registro->getData();
+        $id = $registro->getId();
         
-        $resultado = $this->sql->conectar()->prepare("UPDATE `tb_movimentacoes` SET natureza = :natureza, valor = :valor, descr_registro = :descricao, data = :data, hora = :hora WHERE id_registro = :id ;");
-
-        $natureza_p = $this->natureza;
-        $valor_p = $this->valor;
-        $descricao_p = $this->descricao;
-        $data_p = $this->data;
-        $hora_p = $this->hora;
-
         $resultado->bindParam(":id", $id);
-        $resultado->bindParam(":natureza", $natureza_p);
-        $resultado->bindParam(":valor", $valor_p);
-        $resultado->bindParam(":descricao", $descricao_p);
-        $resultado->bindParam(":data", $data_p);
-        $resultado->bindParam(":hora", $hora_p);
+        $resultado->bindParam(":valor", $valor);
+        $resultado->bindParam(":data", $data);
 
-        $resultado->execute();
-        
-        */
+       $resultado->execute();      
     }
 
     public function pesquisar()

@@ -1,6 +1,6 @@
 <?php
 
-require ('conta.class.php');
+//require ('conta.class.php');
 
 class Registro
 {
@@ -10,29 +10,41 @@ class Registro
     
     private $id;
     
-    private $conta;
+    private $pago;
     
-    public function __construct($valor = NULL, $data = NULL, $id = NULL)
+ //   private $conta;
+    
+    public function __construct($valor = NULL, $data = NULL, $id = NULL, $pago = null)
     {
         $this->valor = $valor;
         $this->data = $data;
         $this->id = $id;
-        $this->conta = Conta::class;      
+        $this->pago = $pago;
+   //     $this->conta = Conta::class;      
     }
     
     public function getValor()
     {
-        return $this->valor;
+        return str_replace(',', '.', $this->valor);
     }
 
     public function getData()
     {
-        return $this->data;
+        if ($this->data){
+            return $this->data;
+        }else {
+            return date('yy-m-d');
+        }
+        
     }
 
     public function getId()
     {
         return $this->id;
+    }
+    public function getPago()
+    {
+        return $this->pago;
     }
 
     public function getConta()
