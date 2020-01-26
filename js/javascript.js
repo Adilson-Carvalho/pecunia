@@ -32,44 +32,47 @@
 	function editar(id){
 		
 		var valor = document.getElementById(id+" valor_linha");
-		valor.innerHTML = "";
-		
 		
 		var input = document.createElement('input');
-		
 		valor.appendChild(input);
-		
 		input.id = 'alterar_valor'+id;
-		
 		$(function() {$('#alterar_valor'+id).maskMoney({decimal:".",thousands:"" });})
-		
+		input.value = ((valor.innerHTML).substring(2,(valor.innerHTML).indexOf("<"))).replace(",",".");
 		
 		var data = document.getElementById(id+" data_linha");
-		
 		data.innerHTML = "";
 		
 		var calendario = document.createElement('input');
-		
-		data.appendChild(calendario).type = "date";
-		
+		data.appendChild(calendario).type = "date";	
 		calendario.id = 'alterar_data'
 			
-			
+/*
+		var celula = document.getElementById(id+" pago");
+		celula.onclik= function(){celula.innerHTML = "";};
+		
+		var select = document.createElement('select');
+		celula.appendChild(select);
+		select.id="opcaoPago"
+		
+		var opcaoSim = document.createElement('tag');
+		opcaoSim.value = "sim";
+		opcaoSim.text = "sim";
+		
+		var teste = document.getElementById("opcaoPago");
+		teste.add(opcaoSim, teste.options[1]);
+*/	
+				
 		var editar = document.getElementById(id+" editar");
-		
 		editar.class='icone_tabela';  
-		
 		editar.src='../img/salvar.png';
 
-		
 		editar.onclick= function (){
-			document.getElementById('data_editar').value = calendario.value;
-			document.getElementById('valor_editar').value = input.value;
+			document.getElementById('data').value = calendario.value;
+			document.getElementById('valor').value = input.value;
+			document.getElementById('opcao').value = "editar";
 			document.getElementById('id_editar').value = id;
 			
-			console.log(document.getElementById('id_editar'))
-			
-			var form = document.getElementById("form_tabela");
+			var form = document.getElementById("form_principal");
 			form.submit();
 			
 		}
@@ -88,15 +91,9 @@
 	
 	$(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
 	
-	//$(function() { // coloca a mascara de moeda no input valor.
-	//			$('#valor').maskMoney();
-	//})
-
-	
 	function canvas(){
 
-		// recupera os valores das celulas retira as palavras e os cifrões e a
-		// virgula
+		// recupera os valores das celulas retira as palavras e os cifrões e a virgula
 		var receita = ((document.getElementById('canvas_receita').innerHTML).substring(10)).replace(".","");
 		var despesa = (document.getElementById('canvas_despesa').innerHTML).substring(12).replace(".","");
 		var receita = parseFloat(receita);

@@ -58,6 +58,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<span id="span_descricao"> Descricacao </span> <input
 									type="hidden" id="conta" name="conta"> <input type="hidden"
 									id="subConta" name="subConta">
+									<input type="hidden"  name="id" id="id_editar" value="editar">
 
 
 								<div class="dropdown-content bt">
@@ -170,7 +171,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
         $id_linha = $value["id_registro"];
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th id='$id_linha pago' onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
         "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
         "<th>" . "<a> <img id='$id_linha editar' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
@@ -193,13 +194,6 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	
 	</div>
 		
-		
- <form id="form_tabela" method="post" action="controller.post.php"> 
-  <input type="hidden"  name="id" id="id_editar" value="editar"> 
- 	 <input type="hidden" name="valor" id="valor_editar"> 
- 	 <input type="hidden" name="data" id="data_editar">
-   <input type="hidden" name="opcao" id="opcao" value="editar"> 
-</form> 
 
 	<!-- tabela dos valorea do canvas, grafico -->
 	<div class='container' style='position: relative; float: left; height: 100%;'>
