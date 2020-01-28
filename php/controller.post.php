@@ -3,7 +3,7 @@ require_once('../class.php/sql.class.php');
 
 function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
-	require('../class.php/usuario.class.php');
+	require_once('../class.php/usuario.class.php');
 	
 	$nome = $_POST['nome'];
 	$senha = $_POST['senha'];
@@ -16,14 +16,14 @@ function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
 
 function gravarDados(){
-
-	$cadastraDado = new Sql(str_replace(',', '.', $_POST['valor']), $_POST['data'], $_POST['subConta']);//$_POST['id_conta']);// str_replace substitui a virgula por ponto
-
-	$cadastraDado->cadastrar();
-	
-	unset($_POST);
-
-	header('Location: main.php');
+ 
+   require_once('../class.php/registro.class.php');
+    
+   $registro = new Registro($_POST['valor'], $_POST['data'], null, null, $_POST['subConta']);
+   
+   Sql::cadastrar($registro);
+   
+   header('Location: main.php');
 	
 }
 
@@ -31,11 +31,9 @@ function editarDados(){
     
     require_once('../class.php/registro.class.php');
     
-    $registro = new Registro($_POST['valor'], $_POST['data'], $_POST['id']);
+    $registro = new Registro($_POST['valor'], $_POST['data'], $_POST['id'], $_POST['pago']);
     
-    Sql::editar($registro);
-    
-    unset($_POST);
+    Sql::editar($registro); 
     
     header('Location: main.php');
     
@@ -43,7 +41,7 @@ function editarDados(){
 
 function inicioDespesasFixas(){
     
-    require('../class.php/sql.class.php');
+    require_once('../class.php/sql.class.php');
     
     $inicioDoMes = new Sql(); // 
     

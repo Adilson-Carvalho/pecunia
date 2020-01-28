@@ -1,7 +1,6 @@
 <?php
 require_once ('conexao.class.php');
 
-
 class Sql
 {
 
@@ -21,32 +20,34 @@ class Sql
         $this->sql = new Conexao();
     }
 
-    public function cadastrar()
+    public static function cadastrar($registro)
     {
-        $resultado = $this->sql->conectar()->prepare("INSERT INTO `tb_movimentacoes` (id_registro, fk_conta, valor, data) VALUES (NULL, :id_conta, :valor, :data);");
-
-        $id_conta_p = $this->id_conta;
-        $valor_p = $this->valor;
-        $data_p = $this->data;
-
-        $resultado->bindParam(":id_conta", $id_conta_p);
-        $resultado->bindParam(":valor", $valor_p);
-        $resultado->bindParam(":data", $data_p);
+        $conexao = new Conexao();
+        $resultado = $conexao->conectar()->prepare("INSERT INTO `tb_movimentacoes` (id_registro, fk_conta, valor, data) VALUES (NULL, :id_conta, :valor, :data);");
        
+        $valor =  $registro->getValor();
+        $data =  $registro->getData();
+        $fk = $registro->getId_conta();
+          
+        $resultado->bindParam(":id_conta", $fk);
+        $resultado->bindParam(":valor", $valor);
+        $resultado->bindParam(":data", $data);
+        
         $resultado->execute();
-
     }
 
     public static function editar($registro)
     {
         $conexao = new Conexao();
        
-        $resultado = $conexao->conectar()->prepare("UPDATE `tb_movimentacoes` SET `valor` = :valor, `data` = :data WHERE `tb_movimentacoes`.`id_registro` = :id;"); 
+        $resultado = $conexao->conectar()->prepare("UPDATE `tb_movimentacoes` SET `pago` = :pago, `valor` = :valor, `data` = :data WHERE `tb_movimentacoes`.`id_registro` = :id;"); 
 
+        $pago = $registro->getPago();
         $valor = $registro->getValor();
         $data = $registro->getData();
         $id = $registro->getId();
         
+        $resultado->bindParam(":pago", $pago);
         $resultado->bindParam(":id", $id);
         $resultado->bindParam(":valor", $valor);
         $resultado->bindParam(":data", $data);

@@ -59,6 +59,12 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 									type="hidden" id="conta" name="conta"> <input type="hidden"
 									id="subConta" name="subConta">
 									<input type="hidden"  name="id" id="id_editar" value="editar">
+									
+									<input type="hidden" id="pago" name="pago">
+									<select id="select_pago" style=" display: none;">
+										<option value=" " selected></option> 
+  										<option value="sim" >sim</option>
+									</select>
 
 
 								<div class="dropdown-content bt">
@@ -171,7 +177,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
         $id_linha = $value["id_registro"];
         // Monta a tabela
         echo "<tr class='linha_tabela' style='position: relative; top:10px;' bgcolor='$cor'>";
-        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th id='$id_linha pago' onclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
+        echo "<th id='$id_linha data_linha'>" . $value['data'] . "</th>" . "<th id='$id_linha pago' ondblclick='pago($id_linha)' style='cursor:pointer'>" . $value['pago'] . "</th>" . "<th>" . $value['natureza'] . 
         "</th>" . "<th>" . $value['conta'] . "</th>" . "<th>" . $value['sub_conta'] . "</th>" . "<th id='$id_linha valor_linha'>" . "R$ " . number_format($value['valor'], 2, ',', '.') . "</th>" . // formata de float para moeda.
 
         "<th>" . "<a> <img id='$id_linha editar' class='icone_tabela' name='img_editar' src='../img/editar.jpg' onclick='editar($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>" . "<th>" . "<a> <img id='$id_linha' class='icone_tabela' name='img_excluir' src='../img/excluir.jpg' onclick='excluir($id_linha)' width='18' height='18' class='d-inline-block align-top'></a>" . "</th>";
@@ -253,6 +259,7 @@ foreach ($valores as $arr) {
 }
 
 echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
+
 
 ?>
 

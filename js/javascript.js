@@ -46,27 +46,20 @@
 		data.appendChild(calendario).type = "date";	
 		calendario.id = 'alterar_data'
 			
-/*
 		var celula = document.getElementById(id+" pago");
-		celula.onclik= function(){celula.innerHTML = "";};
+		celula.innerHTML = "";
 		
-		var select = document.createElement('select');
+		var select = document.getElementById("select_pago");
 		celula.appendChild(select);
-		select.id="opcaoPago"
-		
-		var opcaoSim = document.createElement('tag');
-		opcaoSim.value = "sim";
-		opcaoSim.text = "sim";
-		
-		var teste = document.getElementById("opcaoPago");
-		teste.add(opcaoSim, teste.options[1]);
-*/	
+		select.style.display = "inline";
+		console.log(select.value)
 				
 		var editar = document.getElementById(id+" editar");
 		editar.class='icone_tabela';  
 		editar.src='../img/salvar.png';
 
 		editar.onclick= function (){
+			document.getElementById('pago').value = select.value;
 			document.getElementById('data').value = calendario.value;
 			document.getElementById('valor').value = input.value;
 			document.getElementById('opcao').value = "editar";

@@ -3,15 +3,15 @@
 class Conta
 {
 
-    private $id_conta;
+    public $id_conta;
 
-    private $classificacao;
+    public $classificacao;
 
-    private $natureza;
+    public $natureza;
 
-    private $conta;
+    public $conta;
 
-    private $sub_conta;
+    public $sub_conta;
 
     public function __construct($id_conta = null, $classificacao = null, $natureza = null, $conta = null, $sub_conta = null)
     {

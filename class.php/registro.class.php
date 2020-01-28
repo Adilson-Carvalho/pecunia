@@ -1,8 +1,8 @@
 <?php
 
-//require ('conta.class.php');
+require_once ('conta.class.php');
 
-class Registro
+class Registro extends Conta
 {
     private $valor;
     
@@ -12,20 +12,23 @@ class Registro
     
     private $pago;
     
- //   private $conta;
-    
-    public function __construct($valor = NULL, $data = NULL, $id = NULL, $pago = null)
+    public function __construct($valor = NULL, $data = NULL, $id = NULL, $pago = null, $id_conta = null, $classificacao = null, $natureza = null, $conta = null, $sub_conta = null)
     {
         $this->valor = $valor;
         $this->data = $data;
         $this->id = $id;
         $this->pago = $pago;
-   //     $this->conta = Conta::class;      
+        parent::__construct($id_conta, $classificacao, $natureza, $conta, $sub_conta);     
     }
     
     public function getValor()
     {
-        return str_replace(',', '.', $this->valor);
+        if($this->valor != NULL){
+            return floatval (str_replace('.', '',substr($this->valor,0, -3))+substr(str_replace(',', '.', $this->valor), -3));
+        }
+        else {
+            return 0;
+        }
     }
 
     public function getData()
@@ -35,7 +38,6 @@ class Registro
         }else {
             return date('yy-m-d');
         }
-        
     }
 
     public function getId()
@@ -45,11 +47,6 @@ class Registro
     public function getPago()
     {
         return $this->pago;
-    }
-
-    public function getConta()
-    {
-        return $this->conta;
     }
     
     public function __toString(){
