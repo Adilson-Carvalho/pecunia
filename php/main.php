@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" type="text/css" href="../css/estilo.css">
 
-<?php require_once('../class.php/sql.class.php'); ?>
+<?php require_once('../class.php/Query.class.php'); ?>
 
 
 <?php
@@ -161,9 +161,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
     echo "<script>optionDataHoraAtual($mes, $ano)</script>"; // option com a data do if retro
 
-    $pesquisarDado = new Sql(NULL, $data);
-
-    $resultado = $pesquisarDado->pesquisar();
+    $resultado = Query::pesquisar($data);
 
     $canvas_despesas = array_values(array_unique(array_column($resultado, 'conta'))); // cria um novo array com a coluna conta, retira as variaveis repetidas,
                                                                                       // cria um novo array em ordem

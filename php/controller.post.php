@@ -1,10 +1,10 @@
 <?php
-require_once('../class.php/sql.class.php');
+require_once('../class.php/Query.class.php');
+require_once('../class.php/registro.class.php');
+require_once('../class.php/usuario.class.php');
 
 function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
-	require_once('../class.php/usuario.class.php');
-	
 	$nome = $_POST['nome'];
 	$senha = $_POST['senha'];
 
@@ -16,12 +16,10 @@ function consultaUsuario(){ //pesquisa se o usuario e senha existe
 
 
 function gravarDados(){
- 
-   require_once('../class.php/registro.class.php');
-    
+   
    $registro = new Registro($_POST['valor'], $_POST['data'], null, null, $_POST['subConta']);
    
-   Sql::cadastrar($registro);
+   Query::cadastrar($registro);
    
    header('Location: main.php');
 	
@@ -29,23 +27,17 @@ function gravarDados(){
 
 function editarDados(){
     
-    require_once('../class.php/registro.class.php');
-    
     $registro = new Registro($_POST['valor'], $_POST['data'], $_POST['id'], $_POST['pago']);
     
-    Sql::editar($registro); 
+    Query::editar($registro); 
     
     header('Location: main.php');
     
 }
 
 function inicioDespesasFixas(){
-    
-    require_once('../class.php/sql.class.php');
-    
-    $inicioDoMes = new Sql(); // 
-    
-    $inicioDoMes->comecoMes();//
+      
+    Query::comecoMes();
     
     unset($_POST);
     

@@ -1,13 +1,11 @@
 <?php
-require ('../class.php/conta.class.php');
+require_once ('../class.php/conta.class.php');
 
 echo "<table>";
 
 error_reporting(0);
 
-$con = new Sql();
-
-$menu = $con->menu();
+$menu = Query::menu();
 
 $array_conta = array_unique(array_column($menu, 'conta', 'id_conta'));
 

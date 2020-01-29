@@ -50,7 +50,7 @@ class Registro extends Conta
     }
     
     public function __toString(){
-        return $this->conta." - ".$this->id." - ".$this->valor." - ".$this->conta;
+        return $this->id." - ".$this->data." - ".$this->valor." - ".$this->pago." - ".$this->getId_conta()." - ".$this->getNatureza()." - ".$this->getConta()." - ".$this->getSub_conta();
     }
 }
 
