@@ -20,7 +20,8 @@
 
 	} 
 
-	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data atual
+	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data
+											// atual
 								
 		var optionMes = document.getElementById("option_mes");
 		option_mes.selectedIndex = (mes -1);
@@ -32,13 +33,16 @@
 	function editar(id){
 		
 		var valor = document.getElementById(id+" valor_linha");
+		var temp = ((valor.innerText).substring(2,(valor.innerText).length)).replace(",",".");
+		valor.innerText = '';
 		
 		var input = document.createElement('input');
 		valor.appendChild(input);
 		input.id = 'alterar_valor'+id;
 		$(function() {$('#alterar_valor'+id).maskMoney({decimal:".",thousands:"" });})
-		input.value = ((valor.innerHTML).substring(2,(valor.innerHTML).indexOf("<"))).replace(",",".");
-		
+		input.value = temp;
+		// ((valor.innerHTML).substring(2,(valor.innerHTML).indexOf("<"))).replace(",",".");
+			
 		var data = document.getElementById(id+" data_linha");
 		data.innerHTML = "";
 		
@@ -72,8 +76,8 @@
 	}
 	
 
-	function excluir(id){
-		location.href = 'controller.get.php?id='+id+'&opcao=excluir'; // redireciona pg controller.get id
+function excluir(id){
+	location.href = 'controller.get.php?id='+id+'&opcao=excluir'; 
 																	
 	}
 
@@ -82,11 +86,12 @@
 															// logoff.php
 	}
 	
-	$(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
+$(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
 	
-	function canvas(){
+function canvas(){
 
-		// recupera os valores das celulas retira as palavras e os cifrões e a virgula
+		// recupera os valores das celulas retira as palavras e os cifrões e a
+		// virgula
 		var receita = ((document.getElementById('canvas_receita').innerHTML).substring(10)).replace(".","");
 		var despesa = (document.getElementById('canvas_despesa').innerHTML).substring(12).replace(".","");
 		var receita = parseFloat(receita);
@@ -109,35 +114,43 @@
 				ctx.fillRect (10, 300, 120, alturaReceita);
 
 				ctx.fillStyle = "rgb(255, 99, 71)";
-				ctx.fillRect (155, 300, 120, -((despesa/receita) * 290));//cria uma altura porcentage relativa a altura da receita
+				ctx.fillRect (155, 300, 120, -((despesa/receita) * 290));/* Cria uma altura em porcentagem relativa a altura da receita */															
 
 				ctx.fillStyle = "rgb(0, 191, 255)";
-				ctx.fillRect (300, 300, 120, -((saldo/receita) * 290));// cria uma altura porcentagem realativa a altura da receita
-																		
+				ctx.fillRect (300, 300, 120, -((saldo/receita) * 290));
 			}
 	}
 	
 	
-	function canvas_detalhada(arr){
+function canvas_detalhada(arr){
+	
+		var canvas = document.getElementById("graphic");	
+		var maior = arr[0].sort();//pega o maio valor
 		
-		var canvas_det = document.getElementById("canvas_det");
-			
-		if (canvas_det.getContext) 
-			var ctx_d = canvas_det.getContext("2d");
+		if (canvas.getContext) 
+			var graphic = canvas.getContext("2d");
 		
 		var i = 0;
-		var position = 5;
+		var vertical = 5;
+		var horizontal = 340;
 		
 		for ( i = 0; i <= arr.length; i++){
-			//números
-			ctx_d.fillStyle = 'black';
-			ctx_d.font = "15px Arial";
-			ctx_d.fillText(i,position+canvas_det.width/(arr.length)/2.7,290);
-			//barras
-			ctx_d.fillStyle = "rgba("+Math.floor(Math.random() * 100)+","+Math.floor(Math.random() * 200)+","+Math.floor(Math.random() * 100)+" ,0.3)";	//último número é a transparencia		
-			ctx_d.fillRect (position, 300, (canvas_det.width/(arr.length))-5, - arr[i]);
+			// números
+			graphic.fillStyle = 'black';
+			graphic.font = "15px Arial Black";
+			graphic.stronkeStyle = "#000000";
+			graphic.fillText(i,vertical+canvas.width/(arr.length)/2.7,290);
+						
+			// barras
+			graphic.fillStyle = "rgba("+Math.floor(Math.random() * 100)+","+Math.floor(Math.random() * 200)+","+Math.floor(Math.random() * 100)+" ,0.3)";	// último número é a transparência																																																																		// transparencia
+			graphic.fillRect (vertical, 300, (canvas.width/(arr.length))-5, - (arr[i][0]/maior[0])*290); //proporção em relação a altura
+			vertical += (canvas.width/(arr.length));
 			
-			position += (canvas_det.width/(arr.length));
+			graphic.fillStyle = 'black';
+			graphic.font = "18px Arial";
+			graphic.stronkeStyle = "#000000";
+			graphic.fillText(i+" - "+arr[i][1]+ " = " + "R$ "+ (arr[i][0]).toFixed(2),10, horizontal);
+			horizontal += 25;
 		}
 		
 	}
@@ -150,7 +163,6 @@ function menuDescricacao(conta, sub_conta){
 		inputOpcao.value = conta; // atribui a valor input hidden descricao
 		
 		document.getElementById('span_descricao').innerHTML = sub_conta;
-
 }
 
 

@@ -226,34 +226,27 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 		
 		<div style="border:1px solid #25692A; display:inline-block; font-family:Verdana; font-weight:bold; font-size:15px; padding: 4px;">
 		<div style="border:1px solid #25692A; font-family:Verdana; font-weight:bold; font-size:20px; padding: 4px; ">Despesas Detalhadas</div>
-		<canvas id='canvas_det' style="border: 1px solid black;" width='428'
-			height='300'></canvas>
+		<canvas id='graphic' style="border: 1px solid black;" width='428'
+			height='530'></canvas>
 		
 		<?php
 
-$valores = array();
+echo "<script type='text/javascript'> var arr = []; </script>";
 
 for ($y = 0; $y <= count($canvas_despesas); $y ++) {
 
     for ($x = 0; $x <= count($resultado) + 1; $x ++) {
         if ($canvas_despesas[$y] == $resultado[$x]['conta']) {
-            $valores[$y] += floatval($resultado[$x]['valor']) / floatval($resultado[0]['valor']) * 290;
+            $valores[$y] += floatval($resultado[$x]['valor']); //  / floatval($resultado[0]['valor']) * 290;
         }
     }
-}
-
-echo "<script type='text/javascript'> var arr = []; </script>";
-
-$z = 0;
-foreach ($valores as $arr) {
-
-    if ($arr > 0) {
-
-        echo "<script type='text/javascript'> arr.push(" . $arr . "); </script>";
-        echo "<br>";
-        echo "<br><span>" . $z . " = " . $canvas_despesas[$z] . " = R$ " . $arr / 290 * floatval($resultado[0]['valor']) . "</span>"; //utf8_encode ()
-    }
-    $z ++;
+   
+      if ($valores[$y] > 0) {
+        
+        echo "<script type='text/javascript'> arr.push([" .  $valores[$y]. ",'" . $canvas_despesas[$y] ."']); </script>";
+     
+    }  
+    
 }
 
 echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
