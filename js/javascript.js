@@ -1,6 +1,4 @@
-	
-
-	function onloadForm(){ // coloca dada e hora atual no form
+function onloadForm(){ // coloca dada e hora atual no form
 		
 		document.getElementById('opcao').value = 'gravar';
 		
@@ -124,36 +122,41 @@ function canvas(){
 	
 function canvas_detalhada(arr){
 	
-		var canvas = document.getElementById("graphic");	
-		var maior = arr[0].sort();//pega o maio valor
+		var canvas = document.getElementById("graphic");
+		canvas.height= 325 + arr.length * 25;
 		
-		if (canvas.getContext) 
+		var maior = [0];
+		for (var y = 0; y <= arr.length; y++){
+			if (parseFloat(arr[y]) > parseFloat(maior)){
+				maior.unshift(arr[y][0])	
+			}
+		}
+		
+		if (canvas.getContext){ 
 			var graphic = canvas.getContext("2d");
+		}
 		
-		var i = 0;
 		var vertical = 5;
-		var horizontal = 340;
-		
-		for ( i = 0; i <= arr.length; i++){
+		var horizontal = 335;
+	
+			for (var i = 0; i <= arr.length; i++){
 			// números
 			graphic.fillStyle = 'black';
 			graphic.font = "15px Arial Black";
 			graphic.stronkeStyle = "#000000";
-			graphic.fillText(i,vertical+canvas.width/(arr.length)/2.7,290);
-						
+			graphic.fillText(i,vertical+canvas.width/(arr.length)/2.7,290);			
 			// barras
 			graphic.fillStyle = "rgba("+Math.floor(Math.random() * 100)+","+Math.floor(Math.random() * 200)+","+Math.floor(Math.random() * 100)+" ,0.3)";	// último número é a transparência																																																																		// transparencia
-			graphic.fillRect (vertical, 300, (canvas.width/(arr.length))-5, - (arr[i][0]/maior[0])*290); //proporção em relação a altura
+			graphic.fillRect (vertical, 300, (canvas.width/(arr.length))-5, -(parseFloat(arr[i])/maior[0])*290 ); //proporção em relação a altura		
 			vertical += (canvas.width/(arr.length));
-			
+			//legenda
 			graphic.fillStyle = 'black';
 			graphic.font = "18px Arial";
 			graphic.stronkeStyle = "#000000";
-			graphic.fillText(i+" - "+arr[i][1]+ " = " + "R$ "+ (arr[i][0]).toFixed(2),10, horizontal);
+			graphic.fillText(i+" - "+arr[i][1]+ " = " + "R$ "+ (parseFloat(arr[i])).toFixed(2),10, horizontal);
 			horizontal += 25;
 		}
-		
-	}
+}
 	
 	
 function menuDescricacao(conta, sub_conta){
