@@ -29,7 +29,7 @@ function onloadForm(){ // coloca dada e hora atual no form
 	} 
 
 	function editar(id){
-		
+			
 		var valor = document.getElementById(id+" valor_linha");
 		var temp = ((valor.innerText).substring(2,(valor.innerText).length)).replace(",",".");
 		valor.innerText = '';
@@ -120,47 +120,66 @@ function canvas(){
 	}
 	
 	
-function canvas_detalhada(arr){
-	
-		var canvas = document.getElementById("graphic");
-		canvas.height= 325 + arr.length * 25;
+function canvas_detalhada(canv, arr, title){
+	try{
 		
-		var maior = [0];
-		for (var y = 0; y <= arr.length; y++){
-			if (parseFloat(arr[y]) > parseFloat(maior)){
-				maior.unshift(arr[y][0])	
+		var canvas = document.getElementById(canv);
+		var alturaBarras = 345;
+		canvas.height= alturaBarras + arr.length * 25;
+		
+		var maior = 0;
+		for (var y = 0; y <= (arr.length-1); y++){
+			if (arr[y][0] > maior){
+				maior = parseFloat(arr[y]);	
 			}
 		}
 		
 		if (canvas.getContext){ 
 			var graphic = canvas.getContext("2d");
 		}
-		
+				
 		var vertical = 5;
-		var horizontal = 335;
-	
-			for (var i = 0; i <= arr.length; i++){
+		var horizontal = 355;
+		
+			for (var i = 0; i <= (arr.length-1); i++){
 			// números
-			graphic.fillStyle = 'black';
 			graphic.font = "15px Arial Black";
-			graphic.stronkeStyle = "#000000";
-			graphic.fillText(i,vertical+canvas.width/(arr.length)/2.7,290);			
+			graphic.fillStyle = "#000000";
+			graphic.fillText(i,vertical+canvas.width/(arr.length)/2.7,318);		
 			// barras
 			graphic.fillStyle = "rgba("+Math.floor(Math.random() * 100)+","+Math.floor(Math.random() * 200)+","+Math.floor(Math.random() * 100)+" ,0.3)";	// último número é a transparência																																																																		// transparencia
-			graphic.fillRect (vertical, 300, (canvas.width/(arr.length))-5, -(parseFloat(arr[i])/maior[0])*290 ); //proporção em relação a altura		
+			graphic.fillRect (vertical, 320, (canvas.width/(arr.length))-5, -arr[i][0]/maior*290 ); //proporção em relação a altura		
 			vertical += (canvas.width/(arr.length));
-			//legenda
-			graphic.fillStyle = 'black';
+			//legenda		
 			graphic.font = "18px Arial";
-			graphic.stronkeStyle = "#000000";
-			graphic.fillText(i+" - "+arr[i][1]+ " = " + "R$ "+ (parseFloat(arr[i])).toFixed(2),10, horizontal);
+			graphic.fillStyle = "#000000";
+			graphic.fillText(i+" - "+arr[i][1]+ " = " + "R$ "+ arr[i][0].toFixed(2),10, horizontal);
 			horizontal += 25;
+			}	
+			
+			for(var z = 0; z< alturaBarras-20; z += 20){
+				//grade
+				graphic.moveTo(0,z);
+				graphic.lineTo(canvas.width, z);			
+			}		
+			graphic.strokeStyle = 'rgba(139, 69, 19, 0.3)';
+			graphic.stroke();
+			
+			//título
+			graphic.font = "18px Arial Black";
+			graphic.fillStyle = "#000000";
+			graphic.textAlign = "center";
+			graphic.fillText(title, canvas.width/2, 20);
+		
 		}
+		
+		catch(e){
+			console.log(e);
+		}					
 }
 	
 	
-function menuDescricacao(conta, sub_conta){
-		
+function menuDescricacao(conta, sub_conta){		
 		// input hidden
 		var inputOpcao = document.getElementById('subConta');
 		inputOpcao.value = conta; // atribui a valor input hidden descricao

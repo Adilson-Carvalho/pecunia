@@ -8,7 +8,7 @@ class Query
     public static function cadastrar($registro)
     {
         $conexao = new Conexao();
-        $resultado = $conexao->conectar()->prepare("INSERT INTO `tb_movimentacoes` (id_registro, fk_conta, valor, data) VALUES (NULL, :id_conta, :valor, :data);");
+        $resultado = $conexao->conectar()->prepare("INSERT INTO `tb_movimentacoes` (id_registro, fk_conta, valor, data, pago) VALUES (NULL, :id_conta, :valor, :data, 'sim');");
        
         $valor =  $registro->getValor();
         $data =  $registro->getData();

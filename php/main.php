@@ -225,8 +225,8 @@ echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ "
 		<br><br>
 		
 		<div style="border:1px solid #25692A; display:inline-block; font-family:Verdana; font-weight:bold; font-size:15px; padding: 4px;">
-		<div style="border:1px solid #25692A; font-family:Verdana; font-weight:bold; font-size:20px; padding: 4px; ">Despesas Detalhadas</div>
-		<canvas id='graphic' style="border: 1px solid black;" width='428'
+		
+		<canvas  id='graphic' style="border: 1px solid black;" width='428'
 			height='530'></canvas>
 		
 		<?php
@@ -237,7 +237,7 @@ for ($y = 0; $y <= count($canvas_despesas); $y ++) {
 
     for ($x = 0; $x <= count($resultado) + 1; $x ++) {
         if ($canvas_despesas[$y] == $resultado[$x]['conta']) {
-            $valores[$y] += floatval($resultado[$x]['valor']); //  / floatval($resultado[0]['valor']) * 290;
+            $valores[$y] += floatval($resultado[$x]['valor']);
         }
     }
    
@@ -249,7 +249,7 @@ for ($y = 0; $y <= count($canvas_despesas); $y ++) {
     
 }
 
-echo "<script type='text/javascript'> canvas_detalhada(arr) </script>";
+echo "<script type='text/javascript'> canvas_detalhada('graphic', arr, 'Despesas Detalhadas') </script>";
 
 
 ?>
