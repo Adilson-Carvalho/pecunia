@@ -1,4 +1,4 @@
-function onloadForm(){ // coloca dada e hora atual no form
+onload = function onloadForm(){ // coloca dada e hora atual no form
 		
 		document.getElementById('opcao').value = 'gravar';
 		
@@ -15,6 +15,7 @@ function onloadForm(){ // coloca dada e hora atual no form
 		document.getElementById('valor').value = "";
 
 		document.getElementById('bt_cadastrar').innerHTML = "Cadastrar";
+		
 
 	} 
 
@@ -86,7 +87,7 @@ function excluir(id){
 	
 $(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
 	
-function canvas(){
+ onload = function canvas(){
 
 		// recupera os valores das celulas retira as palavras e os cifrões e a
 		// virgula

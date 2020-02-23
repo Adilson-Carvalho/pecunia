@@ -5,6 +5,7 @@
 	<title>Análise e Desenvolvimento de Sistemas – Programação Web</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<script type="text/javascript"  src="js/index.js"></script>
 
 </head>
 <body>
@@ -23,7 +24,7 @@
 			} 
 		?>
 
-	<form class="container" method="post" action="php\controller.post.php" style="position:absolute; top:30%; left:33%; padding: 2em;">
+	<form class="container"  id="login" method="post"  style="position:absolute; top:30%; left:33%; padding: 2em;">
 		<div>
 			<div>
 			<label style="display: inline-block;  width: 80px; text-align: right;">usuário:</label>

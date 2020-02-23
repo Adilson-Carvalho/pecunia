@@ -4,10 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Análise e Desenvolvimento de Sistemas – Programação Web</title>
 
-<script type="text/javascript"
+<script type="text/javascript" 
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.maskMoney.js"></script>
-<script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript"  src="../js/jquery.maskMoney.js"></script>
+<script type="text/javascript"  src="../js/javascript.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../css/estilo.css">
 
@@ -23,7 +23,7 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 
 	</head>
 
-<body onload="onloadForm(); canvas();">
+<body>
 
 	<div class="container" style="height: 40">
 		<h1 style="position: relative; left: 70px">Pecunia</h1>
