@@ -61,6 +61,7 @@ if(isset($_POST)) {// verifica se existe o array
 		case "editar":
 		    editarDados();
 		    break;
+		default: header('Location: main.php');;
 		}
 	}
 	

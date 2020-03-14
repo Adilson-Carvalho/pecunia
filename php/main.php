@@ -46,8 +46,8 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 				<th colspan='8'>
 
 
-					<form id="form_principal" method="post"
-						action="controller.post.php">
+					<form id="form_principal" method="post" action="controller.post.php">
+					
 						<div style='position: relative; top: 10px;'>
 							<label>Cadastrar Movimentação</label> <input id="data"
 								name="data" class="input_geral" type="date">
@@ -87,14 +87,18 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<button id="bt_cadastrar" type="submit" class="bt">Cadastrar</button>
 							</div>
 						</div>
-					</form>
+		
+				</form>
 
 				</th>
 			
 			
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
-				<th colspan='5'>
+				<th colspan='8'>
+			
+			
+			
 					<form id="form_pesquisa" method="post">
 						<div style='position: relative; top: 10px;'>
 							<label>Movimentação dos mês:</label> <select id="option_mes"
@@ -115,23 +119,23 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 								<option value='2019'>2019</option>
 								<option value='2020'>2020</option>
 								<option value='2021'>2021</option>
-							</select> <input type="hidden" id="opcao" name="opcao"
-								value="pesquisar">
-							<button id="bt_atualizar_pesquiza">Atualizar</button>
+							</select> 
+							
+							
+							
+							<select class="bt" id="cx_opcao" style="width:25px;" class="bt">
+							<option value="atualizar">>  Vizualizar m&ecirc;s de:</option>
+							<option value="cadastrar_inicio_mes">>  Cadastrar movimenta&#231;&#245;es do inicio do m&ecirc;s de:</option>
+							</select>
+							
+							<input type="hidden" id="opcao" name="opcao" value="pesquisar">
+							
+						  	<button id="bt_opcao" class="bt">Vizualizar m&ecirc;s</button>
 						</div>
-					</form>
+			</form>
 				</th>
 
-				<th colspan='3'>
-					<form method="post" action="controller.post.php">
-						<button class="bt" id="bt_cadastrar_fixos" type="submit"
-							style='position: relative; top: 10px;'>Cadastras in&#237;cio do
-							m&#234;s</button>
-						<input type="hidden" id="opcao" name="opcao" value="inicio_de_mes">
-					</form>
-				</th>
-			
-			
+	
 			<tr class='linha_tabela' style='position: relative; top: 10px;'
 				bgcolor='white'>
 				<th>Data:</th>
@@ -199,37 +203,37 @@ if (! (isset($_COOKIE['usuNome']))) { // verifica se cookie foi iniciado, se nã
 	</div>
 		
 
-	<!-- tabela dos valorea do canvas, grafico -->
-	<div class='container' style='position: relative; float: left; height: 100%;'>
+	<!--  grafico -->
+	 <div class='container' style='position: relative; float: left; height: 100%;'> 
 
-	<div style="border:1px solid #25692A; display:inline-block; padding: 4px;">
-		<table>
-			<tr class='linha_tabela' style='position: relative; top: 10px;'>
+		<canvas id='canvas' width='428' height='300' style="border: 3px solid black;" ></canvas>
+	
+		
+		
+<?php
 
-	<?php
+echo "<script type='text/javascript'> var arrs = []; </script>";
 
 $saldo = $receita - $despesa;
 
-echo "<th id='canvas_receita' style='background-color:#90EE90'>" . "Receita R$ " . number_format($receita, 2, ',', '.') . "</th>" . 
-"<th id='canvas_despesa' style='background-color:#FF6347'>" . "Despesas R$ " . number_format($despesa, 2, ',', '.') . "</th>" . 
-"<th style='background-color:#00BFFF'>" . "Saldo R$ " . number_format($saldo, 2, ',', '.') . "</th>";
+$arrs = [[$receita, "Receita"], [$despesa, "Despesa"], [$saldo, "Saldo"]];
+
+for($i = 0; $i< count($arrs); $i++){
+    
+    echo "<script type='text/javascript'> arrs.push([" .  $arrs[$i][0] . ",'" . $arrs[$i][1] ."']); </script>";
+
+}
+
+echo "<script type='text/javascript'> canvas_detalhada('canvas',  arrs , 'Saldos') </script>";
 
 ?>
-					
-		</table>
-
-		<canvas id='canvas' width='428' height='300' ></canvas>
-		</div>
 		
 		
 		<br><br>
 		
-		<div style="border:1px solid #25692A; display:inline-block; font-family:Verdana; font-weight:bold; font-size:15px; padding: 4px;">
+		<canvas  id='graphic' style="position: relative; bottom:435px; left: 450px; border: 3px solid black;" width='428' height='530'></canvas>
 		
-		<canvas  id='graphic' style="border: 1px solid black;" width='428'
-			height='530'></canvas>
-		
-		<?php
+<?php
 
 echo "<script type='text/javascript'> var arr = []; </script>";
 
@@ -254,12 +258,12 @@ echo "<script type='text/javascript'> canvas_detalhada('graphic', arr, 'Despesas
 
 ?>
 
-
+	<canvas  id='graphic_2' style="position: relative; left: -440px; border: 3px solid black; " width='428' height='500'></canvas>
 
 </div>	
 
 
-</div>
+
 
 
 </body>

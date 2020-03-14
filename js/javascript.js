@@ -1,5 +1,6 @@
 onload = function onloadForm(){ // coloca dada e hora atual no form
 		
+
 		document.getElementById('opcao').value = 'gravar';
 		
 		var data = new Date;
@@ -16,7 +17,26 @@ onload = function onloadForm(){ // coloca dada e hora atual no form
 
 		document.getElementById('bt_cadastrar').innerHTML = "Cadastrar";
 		
-
+		
+		
+		
+		var fm = document.getElementById("form_pesquisa");
+		
+		var combobox = document.getElementById('cx_opcao');
+		
+		var options = combobox.getElementsByTagName("option");
+		
+		options[0].onclick = function atualiza(){
+			document.getElementById('bt_opcao').innerHTML = 'Atualizar mês';
+			fm.action="";}
+		
+		options[1].onclick = function inicio(){
+			var hid = fm.getElementsByTagName("input");
+			hid[0].value = "inicio_de_mes";
+			fm.action="controller.post.php";
+			document.getElementById('bt_opcao').innerHTML = 'Cadastrar mês'
+			}
+		
 	} 
 
 	function optionDataHoraAtual(mes, ano){ // carrega o comobox com a data
@@ -86,41 +106,7 @@ function excluir(id){
 	}
 	
 $(function() {$('#valor').maskMoney({decimal:".",thousands:"" });})
-	
- onload = function canvas(){
-
-		// recupera os valores das celulas retira as palavras e os cifrões e a
-		// virgula
-		var receita = ((document.getElementById('canvas_receita').innerHTML).substring(10)).replace(".","");
-		var despesa = (document.getElementById('canvas_despesa').innerHTML).substring(12).replace(".","");
-		var receita = parseFloat(receita);
-		var despesa =  parseFloat(despesa);
-
-		var saldo = receita - despesa;
-
-		var canvas = document.getElementById("canvas");
-		      		
-		    if (canvas.getContext) {
-				var ctx = canvas.getContext("2d");
-
-				var alturaReceita = -290;
-				if(receita == 0){// cria uma referencia quando não há receita
-					alturaReceita = 0;
-					receita = 1;
-				}
-
-				ctx.fillStyle = "rgb(144,238,144)";
-				ctx.fillRect (10, 300, 120, alturaReceita);
-
-				ctx.fillStyle = "rgb(255, 99, 71)";
-				ctx.fillRect (155, 300, 120, -((despesa/receita) * 290));/* Cria uma altura em porcentagem relativa a altura da receita */															
-
-				ctx.fillStyle = "rgb(0, 191, 255)";
-				ctx.fillRect (300, 300, 120, -((saldo/receita) * 290));
-			}
-	}
-	
-	
+		
 function canvas_detalhada(canv, arr, title){
 	try{
 		
@@ -128,12 +114,12 @@ function canvas_detalhada(canv, arr, title){
 		var alturaBarras = 345;
 		canvas.height= alturaBarras + arr.length * 25;
 		
-		var maior = 0;
+		var maior = 0; //arr[0].reduce(function(x,y){return x>y?x:y});
 		for (var y = 0; y <= (arr.length-1); y++){
 			if (arr[y][0] > maior){
 				maior = parseFloat(arr[y]);	
 			}
-		}
+		} 
 		
 		if (canvas.getContext){ 
 			var graphic = canvas.getContext("2d");

@@ -5,7 +5,10 @@
 	<title>Análise e Desenvolvimento de Sistemas – Programação Web</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
-	<script type="text/javascript"  src="js/index.js"></script>
+	
+ 
+<script type="text/javascript"  src="js/index.js"></script> 
+	
 
 </head>
 <body>
@@ -28,14 +31,14 @@
 		<div>
 			<div>
 			<label style="display: inline-block;  width: 80px; text-align: right;">usuário:</label>
-			<input type="text" name="nome" class="input_geral" style="font: 1em sans-serif; width: 300px; -moz-box-sizing: border-box;box-sizing: border-box; border: 1px solid #999;">
+			<input type="text" class="input_geral" style="font: 1em sans-serif; width: 300px; -moz-box-sizing: border-box;box-sizing: border-box; border: 1px solid #999;">
 			</div>
 			<div style=" margin-top: 1em;">
 			<label style="display: inline-block;  width: 80px; text-align: right;">senha:</label>
-			<input type="password" name="senha" class="input_geral" style="font: 1em sans-serif; width: 300px; -moz-box-sizing: border-box;box-sizing: border-box; border: 1px solid #999;">
+			<input type="password"  class="input_geral" style="font: 1em sans-serif; width: 300px; -moz-box-sizing: border-box;box-sizing: border-box; border: 1px solid #999;">
 			</div>
 			<div>
-				<input type="hidden" name="opcao" value="usuario">
+			
 				<button type="submit" class="bt" style="position: relative; top: 8px; left: 150px; background-color: MintCream;">ENTRAR</button>
 			</div>
 		</div>
